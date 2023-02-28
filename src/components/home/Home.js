@@ -1,19 +1,21 @@
 import hero from "../../assets/denise-jans-Lq6rcifGjOU-unsplash.jpg";
+import { Link } from "react-router-dom";
 
-export default function Home() {
+function Home() {
   return (
     <div>
       <img src={hero} alt="film" />
       <p>
         Photo by{" "}
-        <a href="https://unsplash.com/@dmjdenise?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">
-          Denise Jans
-        </a>{" "}
+        <Link to="https://unsplash.com/@dmjdenise?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">
+          Denise Jans {" "}
+        </Link>
         on{" "}
-        <a href="https://unsplash.com/s/photos/movie?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">
+        <Link to="https://unsplash.com/s/photos/movie?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">
           Unsplash
-        </a>
+        </Link>
       </p>
     </div>
   );
 }
+export default Home;
