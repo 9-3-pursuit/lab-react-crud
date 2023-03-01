@@ -28,7 +28,7 @@ Data sourced from [Kaggle](https://www.kaggle.com/shivamb/hulu-movies-and-tv-sho
 
 ### Lab Goals
 
-In class, create the following routes:
+In class, create the following routes: 
 
 - `/` home
 - `/shows` shows index
@@ -38,10 +38,10 @@ In class, create the following routes:
 
 On your own, create the following routes:
 
-- `/movies` movies index
-- `/movies/new` movies new form
-- `/movies/:id` movies show one
-- `/movies/:id/edit` movies edit form
+- `/movies` movies index [✓]
+- `/movies/new` movies new form[✓]
+- `/movies/:id` movies show one[✓]
+- `/movies/:id/edit` movies edit form[✓]
 
 In class, create the following functionality:
 

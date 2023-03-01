@@ -20,6 +20,12 @@ function App() {
           <Route path="/shows/new" element={<ShowsNewForm />} />
           <Route path="/shows/:id" element={<Show />} />
           <Route path="/shows/:id/edit" element={<ShowsEditForm />} />
+
+          {/* Created Routes on Own */}
+          <Route path="/movies" element={<MoviesIndex />} />
+          <Route path="/movies/new" element={<MoviesNewForm />} />
+          <Route path="/movies/:id" element={<MoviesShowOne />} />
+          <Route path="/movies/:id/edit" element={<MoviesEditForm />} />
         </Routes>
         <Footer />
       </Router>
