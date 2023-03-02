@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { updateShow, getOneShow } from "../../api/fetch";
 import "./ShowsForm.css";
 
 export default function ShowsForm() {
@@ -14,7 +16,31 @@ export default function ShowsForm() {
     releaseYear: "",
   });
 
-  function handleSubmit(event) {}
+  const { id: paramID } = useParams();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    let ignore = false;
+    const showResult = async () => {
+      if (!ignore) {
+        try {
+          const result = await getOneShow(paramID);
+          const { id, ...showWithoutID } = result;
+          setShow(showWithoutID);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    };
+    showResult();
+    return () => (ignore = true);
+  }, [paramID]);
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    updateShow(paramID, show);
+    navigate(`/shows/${paramID}`);
+  }
 
   function handleTextChange(event) {
     setShow({
