@@ -9,13 +9,19 @@ import ShowListing from "../shows/ShowListing"
 import { getAllShows } from "../../api/fetch" //grabbing all shows; importing form fecth.js
 import { useState, useEffect } from "react" // add in to use state
 
+
 // TODO: @ some point in our code we should change error msg to true if there's an error
 
 export default function ShowsIndex() {
   const [error, setError] = useState(false) // * state for error msg
   const [shows, setShows] = useState([]) // * state the array of shows
+  const [searchTitle,setSearchTitle] = useState("")
 
-  // TODO: in order what is happeneing from top of useEffect into the error return --v
+  function handleTextChange(event){
+    setSearchTitle(event.target.value)
+  }
+
+  //    TODO: in order what is happeneing from top of useEffect into the error return --v
   // will redener all the shows then set the shows as the selected response aka movie 
   //[] represents the empty array , no dependicies
   // if theres an error, you set the error to true otherwise the error will return false 
