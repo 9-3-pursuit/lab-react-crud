@@ -2,7 +2,13 @@
 const base = process.env.REACT_APP_API_BASE_URL;
 // Create
 export function createShow(show) {
-  return;
+  return fetch(`${base}/shows/`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json", // set the Content-Type header if sending JSON data
+    },
+    body: JSON.stringify(show), // include the data to be sent in the request body
+  });
 }
 
 // Delete
