@@ -1,15 +1,31 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-
 import "./Show.css";
-
 import ErrorMessage from "../errors/ErrorMessage";
+import { getOneShow } from "../../api/fetch";
 
 function Show() {
   const [show, setShow] = useState({});
   const [loadingError, setLoadingError] = useState(false);
 
   const { id } = useParams();
+
+  useEffect(() => {
+    let ignore = false;
+    const fetchData = async () => {
+      if (!ignore) {
+        try {
+          const response = await getOneShow(id);
+          setShow(response);
+        } catch (error) {
+          setLoadingError(true);
+        }
+      }
+    };
+    fetchData();
+
+    return () => (ignore = true);
+  }, [id, show]);
 
   function handleDelete() {}
 
