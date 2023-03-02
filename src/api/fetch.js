@@ -7,7 +7,9 @@ export function createShow(show) {
 
 // Delete
 export function destroyShow(id) {
-  return;
+  return fetch(`${base}/shows/${id}`, {
+    method: "DELETE",
+  });
 }
 
 // Index/Get all
