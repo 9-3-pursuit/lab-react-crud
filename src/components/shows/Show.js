@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import "./Show.css";
+import { Link, useParams, useNavigate } from "react-router-dom";
+import { getOneShow, destroyShow } from "../../api/fetch";
 import ErrorMessage from "../errors/ErrorMessage";
-import { getOneShow } from "../../api/fetch";
+import "./Show.css";
 
 function Show() {
   const [show, setShow] = useState({});
   const [loadingError, setLoadingError] = useState(false);
 
+  const navigate = useNavigate();
   const { id } = useParams();
 
   useEffect(() => {
@@ -25,9 +26,12 @@ function Show() {
     fetchData();
 
     return () => (ignore = true);
-  }, [id, show]);
+  }, [id]);
 
-  function handleDelete() {}
+  const handleDelete = (id) => () => {
+    destroyShow(id);
+    navigate("/shows");
+  };
 
   return (
     <section className="shows-show-wrapper">
@@ -58,7 +62,7 @@ function Show() {
               <p>{show.description}</p>
             </article>
             <aside>
-              <button className="delete" onClick={() => handleDelete(show.id)}>
+              <button className="delete" onClick={handleDelete(show.id)}>
                 Remove show
               </button>
               <Link to={`/shows/${id}/edit`}>
