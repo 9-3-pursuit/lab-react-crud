@@ -9,11 +9,11 @@ import ShowsEditForm from "./components/shows/ShowsEditForm";
 import ShowsIndex from "./components/shows/ShowsIndex";
 import ShowsNewForm from "./components/shows/ShowsNewForm";
 
-// Components added on --v
-import Movies from ".components/movies/Movies"
-import MoviesIndex from ".components/movies/MoviesIndex"
-import MoviesEditForm from "./components/movies/MoviesEditForm"
-import MoviesNewForm from "./components/movies/MoviesNewForm"
+// ? Components added on --v
+// import Movies from ".components/movies/Movies"
+// import MoviesIndex from ".components/movies/MoviesIndex"
+// import MoviesEditForm from "./components/movies/MoviesEditForm"
+// import MoviesNewForm from "./components/movies/MoviesNewForm"
 
 
 function App() {

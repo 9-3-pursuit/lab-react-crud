@@ -1,4 +1,7 @@
 // Shows
+//  TODO: set base url to later use in code
+//environmental variable
+const URL =  process.env.REACT_APP_API_BASE_URL
 
 // Create
 export function createShow(show) {
@@ -7,17 +10,27 @@ export function createShow(show) {
 
 // Delete
 export function destroyShow(id) {
-  return;
+  // method : {} -> an object key to allow for the delete of a movie to occur
+  return fetch(`${URL}/shows/${id}`, {method: "DELETE"})
 }
 
 // Index/Get all
 export function getAllShows() {
-  return;
+  //  return fetch ("http://localhost:5001/api/show") -> this could work as well
+  
+  // TODO: fetches the shows & then returns evaluting value --v 
+
+  return fetch(`${URL}/shows`)
+   .then(response=> response.json())
+ 
 }
 
 // Show/Get one
 export function getOneShow(id) {
-  return;
+  return fetch(`${URL}/shows/${id}`)
+  .then(response=> response.json())
+ 
+
 }
 
 // Update
