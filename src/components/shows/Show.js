@@ -22,7 +22,12 @@ function Show() {
     getOneShow(id)
       .then(response => {
         setShow(response)
-        setLoadingError(false)
+        if(response.id){
+          setLoadingError(false)
+        }else{
+          setLoadingError(true)
+        }
+        
       })
       .catch((error) => {
         console.log(error)

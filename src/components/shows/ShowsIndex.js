@@ -12,13 +12,25 @@ import { useState, useEffect } from "react" // add in to use state
 
 // TODO: @ some point in our code we should change error msg to true if there's an error
 
+function filterShows(search,shows) {
+  return shows.filter((show)=> {
+    return show.title.toLowerCase().includes(search.toLowerCase())
+  })
+}
+
 export default function ShowsIndex() {
   const [error, setError] = useState(false) // * state for error msg
   const [shows, setShows] = useState([]) // * state the array of shows
+  const [allShows, setAllShows] = useState([])
   const [searchTitle,setSearchTitle] = useState("")
+  
 
   function handleTextChange(event){
     setSearchTitle(event.target.value)
+    const result = event.target.value.length ?
+    filterShows(event.target.value, allShows) : allShows 
+    setShows(result)
+
   }
 
   //    TODO: in order what is happeneing from top of useEffect into the error return --v
@@ -32,8 +44,10 @@ export default function ShowsIndex() {
       // ! the final .then condition from the fetch in the fetch.js, 
       // ! it's finishing the promising & giving us access to the the desired return info
       .then(response => {
+        setAllShows(response)
         setShows(response)
         setError(false) // correlates to the the return below, if it is false 
+
 
       })
 
