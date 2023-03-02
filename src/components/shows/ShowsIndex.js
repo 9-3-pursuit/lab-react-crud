@@ -1,13 +1,19 @@
 import { Link } from "react-router-dom";
-
+import { useEffect, useState } from "react";
 import ErrorMessage from "../errors/ErrorMessage";
-
+import ShowListing from "./ShowListing";
+import { getAllShows } from "../../api/fetch";
 import "./ShowsIndex.css";
 
 export default function ShowsIndex() {
+  const [error, setError] = useState(false);
+  const [shows, setShows] = useState([]);
+
+  useEffect(handleFetchEffect(setShows, setError), []);
+
   return (
     <div>
-      {false ? (
+      {error ? (
         <ErrorMessage />
       ) : (
         <section className="shows-index-wrapper">
@@ -26,10 +32,29 @@ export default function ShowsIndex() {
             />
           </label>
           <section className="shows-index">
-            {/* <!-- ShowListing components --> */}
+            {shows.map((show) => (
+              <ShowListing show={show} />
+            ))}
           </section>
         </section>
       )}
     </div>
   );
 }
+
+const handleFetchEffect = (setShows, setError) => () => {
+  let ignore = false;
+  const fetchData = async () => {
+    if (!ignore) {
+      try {
+        const response = await getAllShows();
+        setShows(response);
+      } catch (error) {
+        setError(true);
+      }
+    }
+  };
+  fetchData();
+
+  return () => (ignore = true);
+};
