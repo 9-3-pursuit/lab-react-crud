@@ -8,8 +8,14 @@ import "./ShowsIndex.css";
 export default function ShowsIndex() {
   const [error, setError] = useState(false);
   const [shows, setShows] = useState([]);
+  const [searchTitle, setSearchTitle] = useState("");
 
   useEffect(handleFetchEffect(setShows, setError), []);
+
+  const handleTextChange = (e) => {
+    const newValue = e.target.value.toLowerCase();
+    setSearchTitle(newValue);
+  };
 
   return (
     <div>
@@ -26,15 +32,17 @@ export default function ShowsIndex() {
             Search Shows:
             <input
               type="text"
-              // value={searchTitle}
+              value={searchTitle}
               id="searchTitle"
-              // onChange={handleTextChange}
+              onChange={handleTextChange}
             />
           </label>
           <section className="shows-index">
-            {shows.map((show) => (
-              <ShowListing show={show} />
-            ))}
+            {shows
+              .filter((show) => show.title.toLowerCase().includes(searchTitle))
+              .map((show) => (
+                <ShowListing key={show.id} show={show} />
+              ))}
           </section>
         </section>
       )}
@@ -48,7 +56,13 @@ const handleFetchEffect = (setShows, setError) => () => {
     if (!ignore) {
       try {
         const response = await getAllShows();
-        setShows(response);
+        const validResponses = response.filter(
+          (show) =>
+            Object.hasOwn(show, "id") &&
+            Object.hasOwn(show, "type") &&
+            Object.hasOwn(show, "title")
+        );
+        setShows(validResponses);
       } catch (error) {
         setError(true);
       }
