@@ -15,12 +15,14 @@ export default function ShowsForm() {
     releaseYear: "",
   });
 
-  function handleSubmit(event) {}
+  function handleSubmit(e) {
+    
+  }
 
-  function handleTextChange(event) {
+  function handleTextChange(e) {
     setShow({
       ...show,
-      [event.target.id]: event.target.value,
+      [e.target.id]: e.target.value,
     });
   }
 
