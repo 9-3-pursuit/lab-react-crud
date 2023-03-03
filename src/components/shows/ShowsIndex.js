@@ -9,6 +9,7 @@ import "./ShowsIndex.css";
 export default function ShowsIndex() {
   const [shows, setShows] = useState([]);
   const [error, setError] = useState(false);
+  const [searchTitle, setSearchTitle] = useState("")
 
   useEffect(() => {
     getAllShows()
@@ -21,6 +22,12 @@ export default function ShowsIndex() {
         console.log(error);
       });
   }, []);
+
+  function handleTextChange(event){
+    setSearchTitle(event.target.value)
+    setShows(searchTitle)
+    
+  }
   return (
     <div>
       {error ? (
@@ -36,14 +43,14 @@ export default function ShowsIndex() {
             Search Shows:
             <input
               type="text"
-              // value={searchTitle}
+              value={searchTitle}
               id="searchTitle"
-              // onChange={handleTextChange}
+              onChange={handleTextChange}
             />
           </label>
           <section className="shows-index">
-            {shows.map(show => {
-              return <ShowListing show={show} key={show.id} />
+            {shows.map((show) => {
+              return <ShowListing show={show} key={show.id} />;
             })}
           </section>
         </section>

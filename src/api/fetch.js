@@ -8,7 +8,7 @@ export function createShow(show) {
 
 // Delete
 export function destroyShow(id) {
-  return;
+  return fetch(`${URL}/shows/${id}`, {method:"DELETE"})
 }
 
 // Index/Get all
@@ -18,7 +18,7 @@ export function getAllShows() {
 
 // Show/Get one
 export function getOneShow(id) {
-  return;
+  return fetch(`${URL}/shows/${id}`).then((response) => response.json());
 }
 
 // Update
