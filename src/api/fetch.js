@@ -1,14 +1,22 @@
-// Shows
+// * Shows
 //  TODO: set base url to later use in code
 //environmental variable
 const URL = process.env.REACT_APP_API_BASE_URL
 
-// Create
+// * Create
 export function createShow(show) {
-  return;
+  // method here creates a show in JSON format within the header
+  // w/ a fetch of the info from the API
+  const method = {
+    method: "POST",
+    body: JSON.stringify(show),
+    header: {"Content-Type": "application/json"}
+  }
+  return fetch(`${URL}/shows`,method)
+  .then((response)=>response.json())
 }
 
-// Delete
+// * Delete
 export function destroyShow(id) {
   // method : {} -> an object key to allow for the delete of a movie to occur
   return fetch(`${URL}/shows/${id}`, { method: "DELETE" })
@@ -25,7 +33,7 @@ export function getAllShows() {
 
 }
 
-// Show/Get one
+// * Show/Get one
 export function getOneShow(id) {
   return fetch(`${URL}/shows/${id}`)
     .then(response => response.json())
@@ -33,9 +41,16 @@ export function getOneShow(id) {
 
 }
 
-// Update
+// * Update
 export function updateShow(id, show) {
-  return;
+  const method = {
+    method: "PUT",
+    body: JSON.stringify(show),
+    header: {"Content-Type": "application/json"}
+  }
+  return fetch(`${URL}/shows/${id}`,method)
+  .then((response)=>response.json())
+  
 }
 
 // Movies

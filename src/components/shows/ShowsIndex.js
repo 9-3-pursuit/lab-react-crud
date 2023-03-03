@@ -1,7 +1,5 @@
 import { Link } from "react-router-dom";
-
 import ErrorMessage from "../errors/ErrorMessage";
-
 import "./ShowsIndex.css";
 
 // imports added via class
@@ -9,9 +7,7 @@ import ShowListing from "../shows/ShowListing"
 import { getAllShows } from "../../api/fetch" //grabbing all shows; importing form fecth.js
 import { useState, useEffect } from "react" // add in to use state
 
-
 // TODO: @ some point in our code we should change error msg to true if there's an error
-
 function filterShows(search,shows) {
   return shows.filter((show)=> {
     return show.title.toLowerCase().includes(search.toLowerCase())
@@ -21,14 +17,15 @@ function filterShows(search,shows) {
 export default function ShowsIndex() {
   const [error, setError] = useState(false) // * state for error msg
   const [shows, setShows] = useState([]) // * state the array of shows
-  const [allShows, setAllShows] = useState([])
-  const [searchTitle,setSearchTitle] = useState("")
+  const [allShows, setAllShows] = useState([]) // * state for all shows array
+  const [searchTitle,setSearchTitle] = useState("") // * state for search of show title
   
 
   function handleTextChange(event){
     setSearchTitle(event.target.value)
     const result = event.target.value.length ?
     filterShows(event.target.value, allShows) : allShows 
+    // const filteredShows = filterShow(event.target.value, shows) -> another way to be written
     setShows(result)
 
   }
@@ -73,9 +70,9 @@ export default function ShowsIndex() {
             Search Shows:
             <input
               type="text"
-              // value={searchTitle}
+               value={searchTitle}
               id="searchTitle"
-            // onChange={handleTextChange}
+            onChange={handleTextChange}
             />
           </label>
           <section className="shows-index">
@@ -84,7 +81,7 @@ export default function ShowsIndex() {
               return <ShowListing show={show} key={show.id}/>
             })}
 
-            {/* show={show} key={show.id} */}
+          
           </section>
         </section>
       )}

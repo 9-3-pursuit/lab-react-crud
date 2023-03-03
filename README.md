@@ -29,29 +29,29 @@ Data sourced from [Kaggle](https://www.kaggle.com/shivamb/hulu-movies-and-tv-sho
 ### Lab Goals
 
 In class, create the following routes: 
-
-- `/` home
-- `/shows` shows index
-- `/shows/new` shows new form
-- `/shows/:id` shows show one
-- `/shows/:id/edit` shows edit form
+✓
+- `/` home [✓]
+- `/shows` shows index[✓]
+- `/shows/new` shows new form[✓]
+- `/shows/:id` shows show one[✓]
+- `/shows/:id/edit` shows edit form [✓]
 
 On your own, create the following routes:
 
-- `/movies` movies index [✓]
-- `/movies/new` movies new form[✓]
-- `/movies/:id` movies show one[✓]
-- `/movies/:id/edit` movies edit form[✓]
+- `/movies` movies index []
+- `/movies/new` movies new form[]
+- `/movies/:id` movies show one[]
+- `/movies/:id/edit` movies edit form[]
 
 In class, create the following functionality:
 
-- As a user, I can see an index (list) of shows
-- As a user, I can get an error message if the application is not connected to the server
-- As a user, I can click on a show from the index and see a detailed view
-- As a user, I can delete a show
-- As a user, I can create a show
-- As a user, I can edit a show
-- As a user I can search the list of shows
+- As a user, I can see an index (list) of shows[✓]
+- As a user, I can get an error message if the application is not connected to the server[✓]
+- As a user, I can click on a show from the index and see a detailed view[✓]
+- As a user, I can delete a show[✓]
+- As a user, I can create a show[✓] -> shown in class 
+- As a user, I can edit a show [✓] -> shown in class
+- As a user I can search the list of shows[✓]
 
 On your own, create the following routes:
 
