@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react"; // added useEffect
 import { Link, useParams, useNavigate } from "react-router-dom"; // added useNavigate
 import ErrorMessage from "../errors/ErrorMessage";
-
 import { getOneMovie, destroyMovie } from "../../api/fetch" //grabbing one show; importing form fecth.js
-
+import "../movies/Movie.css"
 
 function Movie() {
     const [movie, setMovie] = useState({});
@@ -22,7 +21,7 @@ function Movie() {
                 // returns all the keys of object as array
                 // if the movies array equals zero return the error as true
                 if (Object.keys(response).length === 0) {
-                    setReturnError(true)
+                    setReturnError(false)
                 } else {
                     setReturnError(false)
                 }
