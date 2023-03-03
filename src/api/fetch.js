@@ -6,7 +6,13 @@ const URL = process.env.REACT_APP_API_BASE_URL
 
 // Create
 export function createShow(show) {
-  return;
+  // creating variable store data for object to create new TV show object
+  const method = {
+    method: "POST",
+    body: JSON.stringify(show),
+    headers: { "Content-Type": "application/json" }
+  };
+  return fetch(`${URL}/shows`, method);
 }
 
 // Delete
@@ -31,11 +37,19 @@ export function getOneShow(id) {
 
 // Update
 export function updateShow(id, show) {
-  return;
+  // creating variable store data for object to update new TV show object
+  const method = {
+    method: "PUT",
+    body: JSON.stringify(show),
+    headers: { "Content-Type": "application/json" }
+  };
+  return fetch`${URL}/shows${id}`;
 }
 
 // Movies
 
+// index/get all
 export function getAllMovies() {
-  return;
+  return fetch(`${URL}/movies`)
+    .then(response => response.json())
 }
