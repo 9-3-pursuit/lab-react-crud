@@ -40,7 +40,7 @@ export default function ShowsIndex() {
 
       // ! the final .then condition from the fetch in the fetch.js, 
       // ! it's finishing the promising & giving us access to the the desired return info
-      .then(response => {
+      .then((response) => {
         setAllShows(response)
         setShows(response)
         setError(false) // correlates to the the return below, if it is false 
