@@ -10,10 +10,10 @@ import ShowsIndex from "./components/shows/ShowsIndex";
 import ShowsNewForm from "./components/shows/ShowsNewForm";
 
 // ? Components added on --v
-// import Movies from ".components/movies/Movies"
-// import MoviesIndex from ".components/movies/MoviesIndex"
-// import MoviesEditForm from "./components/movies/MoviesEditForm"
-// import MoviesNewForm from "./components/movies/MoviesNewForm"
+import Movie from ".components/movies/Movies"
+import MoviesIndex from ".components/movies/MoviesIndex"
+import MoviesEditForm from "./components/movies/MoviesEditForm"
+import MoviesNewForm from "./components/movies/MoviesNewForm"
 
 
 function App() {
@@ -28,11 +28,11 @@ function App() {
           <Route path="/shows/:id" element={<Show />} />
           <Route path="/shows/:id/edit" element={<ShowsEditForm />} />
 
-          {/* Created Routes on Own */}
-          {/* <Route path="/movies" element={<MoviesIndex />} />
+          {/* Movies Routes */}
+          <Route path="/movies" element={<MoviesIndex />} />
           <Route path="/movies/new" element={<MoviesNewForm />} />
-          <Route path="/movies/:id" element={<MoviesShowOne />} />
-          <Route path="/movies/:id/edit" element={<MoviesEditForm />} /> */}
+          <Route path="/movies/:id" element={<Movie />} />
+          <Route path="/movies/:id/edit" element={<MovieEditForm />} />
         </Routes>
         <Footer />
       </Router>

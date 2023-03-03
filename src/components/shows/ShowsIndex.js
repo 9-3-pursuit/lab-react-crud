@@ -61,7 +61,7 @@ export default function ShowsIndex() {
         <ErrorMessage />
       ) : (
         <section className="shows-index-wrapper">
-          <h2>All Shows</h2>
+          <h2>All Shows🍿</h2>
           <button>
             <Link to="/shows/new">Add a new show</Link>
           </button>

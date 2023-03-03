@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react"; // added useEffect
 import { Link, useParams, useNavigate } from "react-router-dom"; // added useNavigate
-
 import "./Show.css";
-
 import ErrorMessage from "../errors/ErrorMessage";
 
 // added in as well via class --- v
