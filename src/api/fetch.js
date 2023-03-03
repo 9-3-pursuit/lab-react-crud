@@ -74,7 +74,7 @@ export function createMovie(show) {
 }
 
 // Update
-export async function updateMovies(id, show) {
+export async function updateMovie(id, show) {
   return fetch(`${base}/movies/${id}`, {
     method: "PUT",
     headers: {

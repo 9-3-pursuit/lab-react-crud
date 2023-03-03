@@ -1,16 +1,16 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { getAllMovies, getAllShows } from "../../api/fetch";
 import ErrorMessage from "../errors/ErrorMessage";
-import ShowListing from "./ShowListing";
-import { getAllShows } from "../../api/fetch";
-import "./ShowsIndex.css";
+import Listing from "./Listing";
+import "./Index.css";
 
-export default function ShowsIndex() {
+export default function Index({ type }) {
   const [error, setError] = useState(false);
-  const [shows, setShows] = useState([]);
+  const [mediaList, setMediaList] = useState([]);
   const [searchTitle, setSearchTitle] = useState("");
 
-  useEffect(handleFetchEffect(setShows, setError), []);
+  useEffect(handleFetchEffect(setMediaList, setError, type), [type]);
 
   const handleTextChange = (e) => {
     const newValue = e.target.value.toLowerCase();
@@ -23,13 +23,15 @@ export default function ShowsIndex() {
         <ErrorMessage />
       ) : (
         <section className="shows-index-wrapper">
-          <h2>All Shows</h2>
+          <h2>All {type}</h2>
           <button>
-            <Link to="/shows/new">Add a new show</Link>
+            <Link to={`/${type.toLowerCase()}/new`}>
+              Add a new {type.toLowerCase().slice(0, -1)}
+            </Link>
           </button>
           <br />
           <label htmlFor="searchTitle">
-            Search Shows:
+            Search {type}:
             <input
               type="text"
               value={searchTitle}
@@ -38,10 +40,12 @@ export default function ShowsIndex() {
             />
           </label>
           <section className="shows-index">
-            {shows
-              .filter((show) => show.title.toLowerCase().includes(searchTitle))
-              .map((show) => (
-                <ShowListing key={show.id} show={show} />
+            {mediaList
+              .filter((media) =>
+                media.title.toLowerCase().includes(searchTitle)
+              )
+              .map((media) => (
+                <Listing key={media.id} media={media} type={type} />
               ))}
           </section>
         </section>
@@ -50,19 +54,21 @@ export default function ShowsIndex() {
   );
 }
 
-const handleFetchEffect = (setShows, setError) => () => {
+const handleFetchEffect = (setMediaList, setError, type) => () => {
   let ignore = false;
   const fetchData = async () => {
     if (!ignore) {
       try {
-        const response = await getAllShows();
+        const response = await (type === "Movies"
+          ? getAllMovies()
+          : getAllShows());
         const validResponses = response.filter(
-          (show) =>
-            Object.hasOwn(show, "id") &&
-            Object.hasOwn(show, "type") &&
-            Object.hasOwn(show, "title")
+          (media) =>
+            Object.hasOwn(media, "id") &&
+            Object.hasOwn(media, "type") &&
+            Object.hasOwn(media, "title")
         );
-        setShows(validResponses);
+        setMediaList(validResponses);
       } catch (error) {
         setError(true);
       }

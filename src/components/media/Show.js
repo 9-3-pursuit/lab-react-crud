@@ -1,11 +1,16 @@
 import { useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
-import { getOneShow, destroyShow } from "../../api/fetch";
+import {
+  getOneShow,
+  destroyShow,
+  getOneMovie,
+  destroyMovie,
+} from "../../api/fetch";
 import ErrorMessage from "../errors/ErrorMessage";
 import "./Show.css";
 
-function Show() {
-  const [show, setShow] = useState({});
+function Show({ type }) {
+  const [media, setMedia] = useState({});
   const [loadingError, setLoadingError] = useState(false);
 
   const navigate = useNavigate();
@@ -16,8 +21,9 @@ function Show() {
     const fetchData = async () => {
       if (!ignore) {
         try {
-          const response = await getOneShow(id);
-          setShow(response);
+          const fetchFunction = type === "Movies" ? getOneMovie : getOneShow;
+          const response = await fetchFunction(id);
+          setMedia(response);
         } catch (error) {
           setLoadingError(true);
         }
@@ -26,16 +32,17 @@ function Show() {
     fetchData();
 
     return () => (ignore = true);
-  }, [id]);
+  }, [id, type]);
 
   const handleDelete = (id) => () => {
-    destroyShow(id);
-    navigate("/shows");
+    const deleteFunction = type === "Movies" ? destroyMovie : destroyShow;
+    deleteFunction(id);
+    navigate(`/${type.toLowerCase()}`);
   };
 
   return (
     <section className="shows-show-wrapper">
-      <h2>{show.title}</h2>
+      <h2>{media.title}</h2>
       <section className="shows-show">
         {loadingError ? (
           <ErrorMessage />
@@ -43,29 +50,29 @@ function Show() {
           <>
             <aside>
               <p>
-                <span>Duration:</span> {show.duration}
+                <span>Duration:</span> {media.duration}
               </p>
               <p>
-                <span>Listed Categories:</span> {show.listedIn}
+                <span>Listed Categories:</span> {media.listedIn}
               </p>
               <p>
-                <span>Country:</span> {show.country}
+                <span>Country:</span> {media.country}
               </p>
               <p>
-                <span>Rating:</span> {show.rating}
+                <span>Rating:</span> {media.rating}
               </p>
               <p>
-                <span>Date Added:</span> {show.dateAdded}
+                <span>Date Added:</span> {media.dateAdded}
               </p>
             </aside>
             <article>
-              <p>{show.description}</p>
+              <p>{media.description}</p>
             </article>
             <aside>
-              <button className="delete" onClick={handleDelete(show.id)}>
-                Remove show
+              <button className="delete" onClick={handleDelete(media.id)}>
+                Remove {type.slice(0, -1).toLowerCase()}
               </button>
-              <Link to={`/shows/${id}/edit`}>
+              <Link to={`/${type.toLowerCase()}/${id}/edit`}>
                 <button>Edit</button>
               </Link>
             </aside>
