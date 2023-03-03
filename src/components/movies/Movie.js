@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-//import MoviesIndex from "./MoviesIndex";
-import { getOneMovie, destroyMovie } from "../../api/fetch.js";
+import { getOneMovie, destroyMovie, updateMovie } from "../../api/fetch.js";
 
 import "./Movie.css";
 
@@ -9,7 +8,7 @@ import ErrorMessage from "../errors/ErrorMessage";
 
 function Movie() {
   const [movie, setMovie] = useState({});
-  const [loadingMovieError, setLoadingMovieError] = useState(false);
+  const [loadingError, setLoadingError] = useState(false);
     // console.log(useParams());
   const { id } = useParams(); // useParams gives us access to the parameters we set in our paths in our routing
   const navigate = useNavigate()
@@ -18,14 +17,14 @@ function Movie() {
     getOneMovie(id).then(response => {
       setMovie(response);
       if (response.id) {
-      setLoadingMovieError(false);
+      setLoadingError(false);
       } else {
-        setLoadingMovieError(true);
+        setLoadingError(true);
       }
     })
     .catch((error) => {
       console.log(error)
-      setLoadingMovieError(true)
+      setLoadingError(true)
     });
   }, [id]);
 
@@ -35,7 +34,17 @@ function Movie() {
     })
     .catch((error) => {
       console.log(error)
-      loadingMovieError(true)
+      loadingError(true)
+    });
+  }
+
+  function handleUpdate(id, movie) {
+    updateMovie(id, movie).then(() => {
+      navigate("/movies");
+    })
+    .catch((error) => {
+      console.log(error)
+      loadingError(true)
     });
   }
 
@@ -43,7 +52,7 @@ function Movie() {
     <section className="movies-movie-wrapper">
       <h2>{movie.title}</h2>
       <section className="movies-movie">
-        {loadingMovieError ? (
+        {loadingError ? (
           <ErrorMessage />
         ) : (
           <>
@@ -69,10 +78,12 @@ function Movie() {
             </article>
             <aside>
               <button className="delete" onClick={() => handleDelete(movie.id)}>
-                Remove movie
+                Remove Movie
               </button>
               <Link to={`/movies/${id}/edit`}>
-                <button>Edit</button>
+                <button className="update" onClick={() => handleUpdate(movie.id)}>
+                  Edit
+                </button>
               </Link>
             </aside>
           </>

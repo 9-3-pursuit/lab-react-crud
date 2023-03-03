@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { getOneShow, destroyShow } from "../../api/fetch";
+import { getOneShow, destroyShow, updateShow } from "../../api/fetch";
 
 import "./Show.css";
 
@@ -9,7 +9,7 @@ import ErrorMessage from "../errors/ErrorMessage";
 function Show() {
   const [show, setShow] = useState({});
   const [loadingError, setLoadingError] = useState(false);
-  // const [updateShow, setUpdateShow] = useState('');
+//  const [updateShow, setUpdateShow] = useState('');
     // console.log(useParams());
   const { id } = useParams(); // useParams gives us access to the parameters we set in our paths in our routing
   const navigate = useNavigate()
@@ -31,6 +31,16 @@ function Show() {
 
   function handleDelete(id) {
     destroyShow(id).then(() => {
+      navigate("/shows");
+    })
+    .catch((error) => {
+      console.log(error)
+      loadingError(true)
+    });
+  }
+
+  function handleUpdate(id, show) {
+    updateShow(id, show).then(() => {
       navigate("/shows");
     })
     .catch((error) => {
@@ -84,10 +94,12 @@ function Show() {
             </article>
             <aside>
               <button className="delete" onClick={() => handleDelete(show.id)}>
-                Remove show
+                Remove Show
               </button>
               <Link to={`/shows/${id}/edit`}>
-                <button>Edit</button>
+                <button  className="update" onClick={() => handleUpdate(show.id)}>
+                  Edit
+                </button>
               </Link>
             </aside>
           </>

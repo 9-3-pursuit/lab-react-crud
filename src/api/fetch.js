@@ -25,8 +25,8 @@ export function getOneShow(id) {
 
 // Update Shows
 export function updateShow(id, show) {
-  return fetch(`${URL}/shows/${id} ${show}`) 
-  .then(response => response.json()) 
+  return fetch(`${URL}/shows/${id} ${show}`, {method: "UPDATE"})
+  //.then(response => response.json()) 
 }
 
 // Movies
@@ -56,5 +56,5 @@ export function getOneMovie(id) {
 
 // Update Movies
 export function updateMovie(id, movie) {
-  return;
+  return fetch(`${URL}/movies/${id} ${movie}`, {method: "UPDATE"})
 }
