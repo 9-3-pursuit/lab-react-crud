@@ -2,6 +2,7 @@
 const URL = process.env.REACT_APP_API_BASE_URL
 // Create
 export function createShow(show) {
+
   return;
 }
 
@@ -26,7 +27,11 @@ export function updateShow(id, show) {
 }
 
 // Movies
-
 export function getAllMovies() {
   return fetch (`${URL}/movies`).then((results) => results.json())
+}
+
+// Show/Get one
+export function getOneMovie(id) {
+  return fetch (`${URL}/movies/${id}`).then((results) => results.json())
 }

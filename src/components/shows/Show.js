@@ -29,7 +29,8 @@ function Show() {
       Navigate("/shows");
     })
     .catch((error) => {
-      setLoadingError(true)
+      console.log(error);
+      setLoadingError(true);
     })
   }
 
