@@ -3,30 +3,41 @@ const URL = process.env.REACT_APP_API_BASE_URL
 
 // Create Show
 export function createShow(show) {
-  return;
-}
+  const method = {
+    method: "POST",
+    body: JSON.stringify(show),
+    headers: { 'Content-Type': 'application/json' }
+  }
+  return fetch(`${URL}/shows`, method)
+  .then((response) => response.json());
+} // database will generate/create an ID for you!
 
 // Delete Show
 export function destroyShow(id) {
-  return fetch(`${URL}/shows/${id}`, {method: "DELETE"})
+  return fetch(`${URL}/shows/${id}`, {method: "DELETE"});
 }
 
 // Index/Get all Shows
 export function getAllShows() {
   return fetch(`${URL}/shows`)
-  .then(response => response.json()) // fetch returns an array of shows in JS.
+  .then(response => response.json()); // fetch returns an array of shows in JS.
 }
 
 // Show/Get one Show
 export function getOneShow(id) {
   return fetch(`${URL}/shows/${id}`)
-  .then(response => response.json()) 
+  .then(response => response.json()); 
 }
 
 // Update Shows
 export function updateShow(id, show) {
-  return fetch(`${URL}/shows/${id} ${show}`, {method: "UPDATE"})
-  //.then(response => response.json()) 
+  const method = {
+    method: "PUT",
+    body: JSON.stringify(show),
+    headers: { 'Content-Type': 'application/json' }
+  }
+  return fetch(`${URL}/shows/${id}`, method)
+  .then(response => response.json()); 
 }
 
 // Movies
@@ -34,8 +45,14 @@ export function updateShow(id, show) {
 
 // Create Movie
 export function createMovie(movie) {
-  return;
-}
+  const method = {
+    method: "POST",
+    body: JSON.stringify(movie),
+    headers: { 'Content-Type': 'application/json' }
+  }
+  return fetch(`${URL}/movies`, method)
+  .then((response) => response.json());
+} // database will generate/create an ID for you!
 
 // Delete Movie
 export function destroyMovie(id) {
@@ -56,5 +73,11 @@ export function getOneMovie(id) {
 
 // Update Movies
 export function updateMovie(id, movie) {
-  return fetch(`${URL}/movies/${id} ${movie}`, {method: "UPDATE"})
+  const method = {
+    method: "PUT",
+    body: JSON.stringify(movie),
+    headers: { 'Content-Type': 'application/json' }
+  }
+  return fetch(`${URL}/movies/${id}`, method)
+  .then(response => response.json()); 
 }

@@ -49,20 +49,6 @@ function Show() {
     });
   }
 
-  // useEffect(() => {
-  // updateShow(id, show).then(response) => {
-  //   setUpdateShow(response);
-  //   if (response.id) {
-  //     setLoadingError(false);
-  //     } else {
-  //       setLoadingError(true);
-  //     }
-  //   })
-  //   .catch((error) => {
-  //     console.log(error)
-  //     setLoadingError(true)
-  //   });
-  // }, [id]);
 
   return (
     <section className="shows-show-wrapper">
@@ -97,9 +83,7 @@ function Show() {
                 Remove Show
               </button>
               <Link to={`/shows/${id}/edit`}>
-                <button  className="update" onClick={() => handleUpdate(show.id)}>
-                  Edit
-                </button>
+                <button>Edit</button>
               </Link>
             </aside>
           </>

@@ -1,5 +1,6 @@
 import { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
+import { createMovie } from "../../api/fetch";
 import "./MoviesForm.css";
 
 export default function MoviesNewForm() {
@@ -15,7 +16,17 @@ export default function MoviesNewForm() {
     releaseYear: "",
   });
 
-  function handleSubmit(event) {}
+  const navigate = useNavigate();
+  function handleSubmit(event) {
+    event.preventDefault();
+    createMovie(movie)
+    .then((response) => {
+      navigate(`/movies/${response.id}}`);
+    })
+    .catch(error => {
+      console.log(error);
+    });
+  }
 
   function handleTextChange(event) {
     setMovie({
