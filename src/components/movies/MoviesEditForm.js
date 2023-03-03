@@ -20,7 +20,7 @@ export default function MoviesForm() {
   let navigate = useNavigate();
   function handleSubmit(event) {
     event.preventDefault();
-    updateShow(id, movie).then(response => {
+    updateMovie(id, movie).then(response => {
       navigate(`/movies/${id}`)
     })
     .catch(error => {
