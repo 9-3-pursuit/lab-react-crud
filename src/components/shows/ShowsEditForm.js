@@ -1,5 +1,14 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import "./ShowsForm.css";
+
+// TODO: imports added on --- v 
+import { getOneShow, updateShow } from "../../api/fetch";
+import { useParams, useNavigate } from "react-router-dom";
+
+
+// <Link to={`/shows/${id}/edit`}>
+// <button>Edit</button> 
+// </Link>
 
 export default function ShowsForm() {
   const [show, setShow] = useState({
@@ -13,8 +22,36 @@ export default function ShowsForm() {
     rating: "",
     releaseYear: "",
   });
+  // console.log(useParams)
 
-  function handleSubmit(event) {}
+  // * deconstructing the object info
+  const { id } = useParams()
+  let navigate = useNavigate()
+
+  function handleSubmit(event) {
+    event.preventDefault()
+
+    // * updating show with proper id & show by fetching the info/ navigating to it ---v
+    updateShow(id, show)
+      .then((response) => {
+        // navigate(`/shows/${response.id}`) -> this can work too
+        navigate(`/shows/${id}`)
+
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+
+  useEffect(()=>{
+    getOneShow(id)
+    .then((response)=> {
+      setShow(response)
+    })
+    .catch((error) =>{
+      console.log(error)
+    })
+  },[id])
 
   function handleTextChange(event) {
     setShow({
