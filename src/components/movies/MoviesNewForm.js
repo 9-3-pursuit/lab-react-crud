@@ -1,6 +1,8 @@
 import { useState} from "react";
 import { createMovie } from "../../api/fetch" 
 import {useNavigate} from "react-router-dom"
+import "./MoviesForms.css"
+
 
 export default function MovieNewForm() {
   const [movie, setMovie] = useState({

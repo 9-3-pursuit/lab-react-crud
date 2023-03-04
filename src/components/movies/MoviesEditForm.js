@@ -4,7 +4,7 @@ import { useState,useEffect } from "react";
 // TODO: imports added on --- v 
 import { getOneMovie, updateMovie } from "../../api/fetch";
 import { useParams, useNavigate } from "react-router-dom";
-
+import "./MoviesForms.css"
 
 // <Link to={`/shows/${id}/edit`}>
 // <button>Edit</button> 

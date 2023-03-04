@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import { getAllMovies } from "../../api/fetch"
 import ErrorMessage from "../errors/ErrorMessage"
 import MovieListing from "../movies/MovieListings"
+import "./MoviesIndex.css"
 
 function filterMovies(search, movie) {
   return movie.filter((movie) => {
@@ -13,7 +14,7 @@ function filterMovies(search, movie) {
 export default function MoviesIndex() {
   const [loadError, setLoadError] = useState(false)
   const [movies, setMovies] = useState([])
-  const [allMovies, setAllMovies] = useState()
+  const [allMovies, setAllMovies] = useState([])
   const [title, setTitle] = useState("")
 
   function handleTextChange(event) {
