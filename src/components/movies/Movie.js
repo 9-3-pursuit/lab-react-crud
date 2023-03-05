@@ -39,9 +39,9 @@ function handleDelete(id) {
     });
 }
 return (
-    <section className="movies-movie-wrapper">
-      <h2>{show.title}</h2>
-      <section className="movies-movie">
+    <section className="shows-show-wrapper">
+      <h2>{movie.title}</h2>
+      <section className="shows-show">
         {loadingError ? (
           <ErrorMessage />
         ) : (
@@ -68,7 +68,7 @@ return (
             </article>
             <aside>
               <button className="delete" onClick={() => handleDelete(movie.id)}>
-                Remove show
+                Remove movie
               </button>
               <Link to={`/movies/${id}/edit`}>
                 <button>Edit</button>
@@ -79,6 +79,5 @@ return (
       </section>
     </section>
   );
-
-        }
+}
 export default Movie;

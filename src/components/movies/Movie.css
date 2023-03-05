@@ -20,7 +20,7 @@
     color: var(--light);
   }
   
-  .shows-movie aside p {
+  .movies-movie aside p {
     display: inline-block;
     font-size: 14px;
     margin: 10px 25px;
