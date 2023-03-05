@@ -40,3 +40,13 @@ In macOS or Linux, you can use the `lsof` (list open files) command to show you 
 # In this case we are listening for traffic in port 5000
 lsof -i :5000
 ```
+
+# CRUD Operations for our React App
+
+| Page Type | Frontend URL: looks like | Backend URL: looks like           | HTTP Verb | CRUD Action |
+| --------- | ------------------------ | --------------------------------- | --------- | ----------- |
+| Index     | localhost:3000/shows     | localhost:3000/api-base/shows     | GET       | Read        |
+| Show      | localhost:3000/shows/:id | localhost:3000/api-base/shows/:id | GET       | Read        |
+| New       | localhost:3000/shows/new | localhost:3000/api-base/shows     | POST      | Create      |
+| Edit      | localhost:3000/shows/:id | localhost:3000/api-base/shows/:id | PUT       | Update      |
+| Delete    |                          | localhost:3000/api-base/shows/:id | DELETE    | Delete      |
