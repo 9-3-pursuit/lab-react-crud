@@ -6,15 +6,30 @@ import ErrorMessage from "../errors/ErrorMessage";
 
 import "./ShowsIndex.css";
 
+function filterShows(search, shows) {
+  shows.filter((show) => {
+    console.log(show.title.toLowerCase().includes(search.toLowerCase()))
+    return show.title.toLowerCase().includes(search.toLowerCase());
+  }); 
+}
+
 export default function ShowsIndex() {
   const [shows, setShows] = useState([]);
   const [error, setError] = useState(false);
-  const [searchTitle, setSearchTitle] = useState("")
+  const [searchTitle, setSearchTitle] = useState("");
+  const [allShows, setAllShows] = useState([]);
+
+  function handleTextChange(event) {
+    setSearchTitle(event.target.value);
+    const filteredResult = event.target.value.length ? filterShows(event.target.value, allShows) : allShows
+    setShows(filteredResult);
+  }
 
   useEffect(() => {
     getAllShows()
       .then((results) => {
         setShows(results);
+        setAllShows(results);
         setError(false);
       })
       .catch((error) => {
@@ -23,11 +38,6 @@ export default function ShowsIndex() {
       });
   }, []);
 
-  function handleTextChange(event){
-    setSearchTitle(event.target.value)
-    setShows(searchTitle)
-    
-  }
   return (
     <div>
       {error ? (
