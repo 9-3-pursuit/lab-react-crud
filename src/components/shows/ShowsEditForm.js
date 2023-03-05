@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { updateShow, getOneShow } from "../../api/fetch";
 import "./ShowsForm.css";
 
 export default function ShowsForm() {
@@ -13,8 +15,30 @@ export default function ShowsForm() {
     rating: "",
     releaseYear: "",
   });
+  //  console.log(useParams())
+  const { id } = useParams();
+  let navigate = useNavigate();
 
-  function handleSubmit(event) {}
+  function handleSubmit(event) {
+    event.preventDefault();
+    updateShow(id, show)
+      .then((response) => {
+        navigate(`/shows/${id}`);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  useEffect(() => {
+    getOneShow(id)
+      .then((response) => {
+        setShow(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [id]);
 
   function handleTextChange(event) {
     setShow({
@@ -22,7 +46,6 @@ export default function ShowsForm() {
       [event.target.id]: event.target.value,
     });
   }
-
   return (
     <form onSubmit={handleSubmit}>
       <label htmlFor="title">Title:</label>
@@ -32,7 +55,6 @@ export default function ShowsForm() {
         value={show.title}
         onChange={handleTextChange}
       />
-
       <label htmlFor="description">Description:</label>
       <input
         type="text"
@@ -40,7 +62,6 @@ export default function ShowsForm() {
         value={show.description}
         onChange={handleTextChange}
       />
-
       <label htmlFor="type">Type</label>
       <input
         type="text"
@@ -48,7 +69,6 @@ export default function ShowsForm() {
         value={show.type}
         onChange={handleTextChange}
       />
-
       <label htmlFor="rating">Rating:</label>
       <input
         type="text"
@@ -56,7 +76,6 @@ export default function ShowsForm() {
         value={show.rating}
         onChange={handleTextChange}
       />
-
       <label htmlFor="listedIn">Listed in</label>
       <input
         type="text"
@@ -64,7 +83,6 @@ export default function ShowsForm() {
         value={show.listedIn}
         onChange={handleTextChange}
       />
-
       <label htmlFor="duration">Duration</label>
       <input
         type="text"
@@ -72,7 +90,6 @@ export default function ShowsForm() {
         value={show.duration}
         onChange={handleTextChange}
       />
-
       <label htmlFor="releaseYear">Release Year</label>
       <input
         type="text"
@@ -80,7 +97,6 @@ export default function ShowsForm() {
         value={show.releaseYear}
         onChange={handleTextChange}
       />
-
       <label htmlFor="country">Country</label>
       <input
         type="text"
@@ -88,7 +104,6 @@ export default function ShowsForm() {
         value={show.country}
         onChange={handleTextChange}
       />
-
       <label htmlFor="dateAdded">Date added:</label>
       <input
         type="text"
@@ -96,9 +111,7 @@ export default function ShowsForm() {
         value={show.dateAdded}
         onChange={handleTextChange}
       />
-
       <br />
-
       <input type="submit" />
     </form>
   );
