@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 import ErrorMessage from "../errors/ErrorMessage";
 
-import "./ShowsIndex.css";
+import "./styles/ShowsIndex.css";
 
 export default function ShowsIndex() {
   return (
@@ -25,9 +25,7 @@ export default function ShowsIndex() {
               // onChange={handleTextChange}
             />
           </label>
-          <section className="shows-index">
-            {/* <!-- ShowListing components --> */}
-          </section>
+          <section className="shows-index">{/* <!-- ShowListing components --> */}</section>
         </section>
       )}
     </div>

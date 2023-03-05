@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
-import "./Show.css";
+import "./styles/Show.css";
 
 import ErrorMessage from "../errors/ErrorMessage";
 
