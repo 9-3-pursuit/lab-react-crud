@@ -14,7 +14,9 @@ function Show() {
   const { id } = useParams();
 
   useEffect(() => {
-    setShow(getOneShow(id));
+    getOneShow(id)
+      .then((showData) => setShow(showData))
+      .catch((error) => setLoadingError(true));
   }, [id]);
 
   function handleDelete() {}
