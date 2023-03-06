@@ -1,9 +1,11 @@
 import "./styles/Footer.css";
 
-export default function Footer() {
+const Footer = () => {
   return (
     <footer>
-      <p>ScreenViews. An application created by YOUR_NAME.</p>
+      <p>ScreenViews. An application created by Harold F.</p>
     </footer>
   );
-}
+};
+
+export default Footer;

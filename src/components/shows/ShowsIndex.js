@@ -1,13 +1,33 @@
 import { Link } from "react-router-dom";
-
+import { useState, useEffect } from "react";
 import ErrorMessage from "../errors/ErrorMessage";
+import { getAllShows } from "../../api/fetch";
 
 import "./styles/ShowsIndex.css";
+import ShowListing from "./ShowListing";
 
 export default function ShowsIndex() {
+  const [error, setError] = useState(false);
+  const [shows, setShows] = useState([]);
+  const [searchTitle, setSearchTitle] = useState("");
+
+  useEffect(() => {
+    getAllShows()
+      .then((data) => setShows(data))
+      .catch((catchError) => {
+        console.log(catchError);
+        setError(true);
+      });
+  }, []);
+
+  const handleTextChange = (event) => {
+    const { value } = event.target;
+    setSearchTitle(value);
+  };
+
   return (
     <div>
-      {false ? (
+      {error ? (
         <ErrorMessage />
       ) : (
         <section className="shows-index-wrapper">
@@ -18,14 +38,13 @@ export default function ShowsIndex() {
           <br />
           <label htmlFor="searchTitle">
             Search Shows:
-            <input
-              type="text"
-              // value={searchTitle}
-              id="searchTitle"
-              // onChange={handleTextChange}
-            />
+            <input type="text" value={searchTitle} id="searchTitle" onChange={handleTextChange} />
           </label>
-          <section className="shows-index">{/* <!-- ShowListing components --> */}</section>
+          <section className="shows-index">
+            {shows.map((show) => {
+              return <ShowListing show={show} />;
+            })}
+          </section>
         </section>
       )}
     </div>
