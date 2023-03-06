@@ -14,15 +14,15 @@ export function destroyShow(id) {
 // Index/Get all
 export async function getAllShows() {
   const response = await fetch(`${URL}/shows`);
-  const data = await response.json();
-  return data;
+  const shows = await response.json();
+  return shows;
 }
 
 // Show/Get one
 export async function getOneShow(id) {
   const response = await fetch(`${URL}/shows/${id}`);
-  const data = await response.json();
-  return data;
+  const show = await response.json();
+  return show;
 }
 
 // Update
