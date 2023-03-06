@@ -1,5 +1,3 @@
-import { useContext } from "react";
-
 const URL = process.env.REACT_APP_API_BASE_URL;
 // Shows
 
@@ -42,6 +40,8 @@ export function updateShow(id, show) {
 
 // Movies
 
+// Index/Get all
+
 export function getAllMovies() {
   return fetch(`${URL}/movies`).then((response) => response.json());
 }
@@ -67,4 +67,17 @@ export function createMovie(movie) {
     headers: { "content-type": "application/json" },
   };
   return fetch(`${URL}/movies`, method).then((response) => response.json());
+}
+
+// Update
+
+export function updateMovie(id, movie) {
+  const method = {
+    method: "PUT",
+    body: JSON.stringify(movie),
+    headers: { "content-type": "application/json" },
+  };
+  return fetch(`${URL}/movies/${id}`, method).then((response) =>
+    response.json()
+  );
 }
