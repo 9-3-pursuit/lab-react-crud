@@ -1,9 +1,10 @@
 import "./Footer.css";
 
-export default function Footer() {
+function Footer() {
   return (
     <footer>
-      <p>ScreenViews. An application created by YOUR_NAME.</p>
+      <p>ScreenViews. An application created by Vandhana Mohan.</p>
     </footer>
   );
 }
+export default Footer
