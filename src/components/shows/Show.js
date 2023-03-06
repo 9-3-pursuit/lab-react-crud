@@ -13,7 +13,6 @@ function Show() {
   useEffect(() => {
     getOneShow(id)
       .then((results) => {
-        console.log(results);
         setShow(results);
         if (results.id) {
           setLoadingError(false);

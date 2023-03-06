@@ -3,12 +3,17 @@ const URL = process.env.REACT_APP_API_BASE_URL;
 
 // Create
 export function createShow(show) {
-  return;
+  const method = {
+    method: "POST",
+    body: JSON.stringify(show),
+    headers: { "content-type": "application/json" },
+  };
+  return fetch(`${URL}/shows`, method).then((response) => response.json());
 }
 
 // Delete
 export function destroyShow(id) {
-  return fetch(`${URL}/shows/${id}`, {method:"DELETE"})
+  return fetch(`${URL}/shows/${id}`, { method: "DELETE" });
 }
 
 // Index/Get all
@@ -23,11 +28,18 @@ export function getOneShow(id) {
 
 // Update
 export function updateShow(id, show) {
-  return;
+  const method = {
+    method: "PUT",
+    body: JSON.stringify(show),
+    headers: { "content-type": "application/json" },
+  };
+  return fetch(`${URL}/shows/${id}`, method).then((response) =>
+    response.json()
+  );
 }
 
 // Movies
 
 export function getAllMovies() {
-  return;
+  return fetch(`${URL}/movies`).then((response) => response.json());
 }

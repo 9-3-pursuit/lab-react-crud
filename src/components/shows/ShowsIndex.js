@@ -7,8 +7,7 @@ import ErrorMessage from "../errors/ErrorMessage";
 import "./ShowsIndex.css";
 
 function filterShows(search, shows) {
-  shows.filter((show) => {
-    console.log(show.title.toLowerCase().includes(search.toLowerCase()))
+  return shows.filter((show) => {
     return show.title.toLowerCase().includes(search.toLowerCase());
   }); 
 }
