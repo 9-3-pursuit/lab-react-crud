@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { getAllShows } from "../../api/fetch";
 import ShowListing from "../shows/ShowListing";
 import ErrorMessage from "../errors/ErrorMessage";
-
 import "./ShowsIndex.css";
 
 function filterShows(search, shows) {
