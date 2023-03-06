@@ -1,3 +1,5 @@
+import { useContext } from "react";
+
 const URL = process.env.REACT_APP_API_BASE_URL;
 // Shows
 
@@ -54,4 +56,15 @@ export function getOneMovie(id) {
 
 export function destroyMovie(id) {
   return fetch(`${URL}/movies/${id}`, { method: "DELETE" });
+}
+
+// Create
+
+export function createMovie(movie) {
+  const method = {
+    method: "POST",
+    body: JSON.stringify(movie),
+    headers: { "content-type": "application/json" },
+  };
+  return fetch(`${URL}/movies`, method).then((response) => response.json());
 }
