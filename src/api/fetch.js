@@ -43,3 +43,15 @@ export function updateShow(id, show) {
 export function getAllMovies() {
   return fetch(`${URL}/movies`).then((response) => response.json());
 }
+
+// Movie/Get one
+
+export function getOneMovie(id) {
+  return fetch(`${URL}/movies/${id}`).then((response) => response.json());
+}
+
+// Delete
+
+export function destroyMovie(id) {
+  return fetch(`${URL}/movies/${id}`, { method: "DELETE" });
+}
