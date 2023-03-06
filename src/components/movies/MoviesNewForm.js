@@ -29,7 +29,10 @@ function MoviesNewForm() {
   }
 
   function handleTextChange(event) {
-    setMovie();
+    setMovie({
+      ...movie,
+      [event.target.id]: event.target.value,
+    });
   }
 
   return (
@@ -41,6 +44,7 @@ function MoviesNewForm() {
         onChange={handleTextChange}
         id="title"
       />
+
       <label htmlFor="type">Type:</label>
       <input
         type="text"
@@ -48,6 +52,7 @@ function MoviesNewForm() {
         onChange={handleTextChange}
         id="type"
       />
+
       <label htmlFor="country">Country:</label>
       <input
         type="text"
@@ -56,15 +61,55 @@ function MoviesNewForm() {
         id="country"
       />
 
-      {/* 
-    
-    country: "",
-    dateAdded: "",
-    releaseYear: "",
-    rating: "",
-    duration: "",
-    listedIn: "",
-    description: "", */}
+      <label htmlFor="rating">Rating:</label>
+      <input
+        type="text"
+        id="rating"
+        onChange={handleTextChange}
+        value={movie.rating}
+      />
+
+      <label htmlFor="duration">Duration:</label>
+      <input
+        type="text"
+        id="duration"
+        value={movie.duration}
+        onChange={handleTextChange}
+      />
+
+      <label htmlFor="releaseYear">Released Year:</label>
+      <input
+        type="text"
+        id="releaseYear"
+        value={movie.releaseYear}
+        onChange={handleTextChange}
+      />
+
+      <label htmlFor="dateAdded">Date Added:</label>
+      <input
+        type="text"
+        id="dateAdded"
+        value={movie.dateAdded}
+        onChange={handleTextChange}
+      />
+
+      <label htmlFor="description">Description:</label>
+      <input
+        type="text"
+        id="description"
+        value={movie.description}
+        onChange={handleTextChange}
+      />
+
+      <label htmlFor="listedIn">Listed In:</label>
+      <input
+        type="text"
+        id="listedIn"
+        value={movie.listedIn}
+        onChange={handleTextChange}
+      />
+      <br />
+      <input type="submit" />
     </form>
   );
 }
