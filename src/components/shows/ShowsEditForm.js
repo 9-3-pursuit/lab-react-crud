@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 
 import { getMedia, updateMedia } from "../../api/fetch";
 
-import "./styles/ShowsForm.css";
+import "../styles/MediaForm.css";
 
 export default function ShowsForm() {
   const { id } = useParams();
