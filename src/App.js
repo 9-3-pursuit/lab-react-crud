@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 // Barrel importing Components
-import { Footer, Home, Nav, Show, ShowsEditForm, ShowsIndex, ShowsNewForm, MoviesIndex } from "./components";
+import { Footer, Home, Nav, Show, ShowsEditForm, ShowsIndex, ShowsNewForm, MoviesIndex, Movie, MoviesNewForm, MoviesEditForm } from "./components";
 
 function App() {
   return (
@@ -15,6 +15,9 @@ function App() {
           <Route path="/shows/:id" element={<Show />} />
           <Route path="/shows/:id/edit" element={<ShowsEditForm />} />
           <Route path="/movies" element={<MoviesIndex />} />
+          <Route path="/movies/:id" element={<Movie />} />
+          <Route path="/movies/new" element={<MoviesNewForm />} />
+          <Route path="/movies/:id/edit" element={<MoviesEditForm />} />
         </Routes>
         <Footer />
       </Router>

@@ -7,7 +7,7 @@ export default function MovieListing({ movie }) {
       <h3 className="title">
         {/* This is where our `show` component is given the showID that we will later use in our `show` component. 
         Therefore allowing us to use the `useParams` feature */}
-        <Link to={`/shows/${movie.id}`}>{movie.title}</Link>
+        <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
       </h3>
       <p className="description">{movie.description}</p>
       <aside className="details">
