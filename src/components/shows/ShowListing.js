@@ -5,6 +5,8 @@ export default function ShowListing({ show }) {
   return (
     <article className="show">
       <h3 className="title">
+        {/* This is where our `show` component is given the showID that we will later use in our `show` component. 
+        Therefore allowing us to use the `useParams` feature */}
         <Link to={`/shows/${show.id}`}>{show.title}</Link>
       </h3>
       <p className="description">{show.description}</p>

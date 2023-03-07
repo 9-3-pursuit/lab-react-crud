@@ -7,7 +7,8 @@ import "./styles/Show.css";
 
 import ErrorMessage from "../errors/ErrorMessage";
 
-import { getOneShow } from "../../api/fetch";
+// importing the `getOneShow` function from the `fetch` module
+import { getOneShow, destroyShow } from "../../api/fetch";
 
 function Show() {
   const [show, setShow] = useState({});
