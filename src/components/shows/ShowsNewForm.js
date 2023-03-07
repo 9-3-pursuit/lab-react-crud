@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import "./styles/ShowsForm.css";
+import "../styles/MediaForm.css";
 
 export default function ShowsForm() {
   const [show, setShow] = useState({
