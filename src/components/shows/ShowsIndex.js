@@ -12,6 +12,11 @@ export default function ShowsIndex() {
   const [shows, setShows] = useState([]);
   const [searchTitle, setSearchTitle] = useState("");
 
+  // the `useEffect` hook allows us to run code when the component mounts
+  // the second argument is an array of dependencies
+  // So this means that the code inside the callback function of the
+  // `useEffect` hook will only run when the component mounts
+  // `mounts` means that the component is first rendered to the DOM
   useEffect(() => {
     getAllShows()
       .then((data) => setShows(data))
