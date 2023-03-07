@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import ErrorMessage from "../errors/ErrorMessage";
 import { getAllShows } from "../../api/fetch";
 
-import "./styles/ShowsIndex.css";
+import ErrorMessage from "../errors/ErrorMessage";
 import ShowListing from "./ShowListing";
+
+import "./styles/ShowsIndex.css";
 
 export default function ShowsIndex() {
   const [error, setError] = useState(false);
