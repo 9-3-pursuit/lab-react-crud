@@ -31,7 +31,14 @@ export async function getOneShow(id) {
 
 // Update
 export function updateShow(id, show) {
-  return;
+  const response = fetch(`${URL}/shows/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(show),
+  });
+  return response;
 }
 
 // Movies
