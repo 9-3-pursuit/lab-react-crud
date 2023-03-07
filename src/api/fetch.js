@@ -34,13 +34,13 @@ export async function getMedia(mediaType, mediaID) {
   return media;
 }
 
-export async function updateShow(id, show) {
-  const response = await fetch(`${URL}/shows/${id}`, {
+export async function updateMedia(mediaType, mediaID, media) {
+  const response = await fetch(`${URL}/${mediaType}/${mediaID}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(show),
+    body: JSON.stringify(media),
   });
   return response;
 }

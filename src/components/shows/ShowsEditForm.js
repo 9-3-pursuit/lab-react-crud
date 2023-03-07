@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
-import { getMedia, updateShow } from "../../api/fetch";
+import { getMedia, updateMedia } from "../../api/fetch";
 
 import "./styles/ShowsForm.css";
 
@@ -35,7 +35,7 @@ export default function ShowsForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    updateShow(id, show)
+    updateMedia("shows", id, show)
       .then((response) => {
         console.log(response);
         navigate(`/shows/${id}`);
