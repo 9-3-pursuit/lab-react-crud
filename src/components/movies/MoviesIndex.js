@@ -21,12 +21,12 @@ export default function MoviesIndex() {
   };
 
   useEffect(() => {
-    if (location.state?.deletedShowTitle) {
+    if (location.state?.deletedMovieTitle) {
       setDeletedMovieTitle(location.state.deletedMovieTitle);
-      delete location.state.deletedShowTitle;
+      delete location.state.deletedMovieTitle;
     }
 
-    getAllMedia("shows")
+    getAllMedia("movies")
       .then((data) => {
         const filtered = filterMediaByTitle(data, searchTitle);
         setMovies(filtered);
@@ -53,7 +53,7 @@ export default function MoviesIndex() {
             <input type="text" value={searchTitle} id="searchTitle" onChange={handleTextChange} />
           </label>
           <h1>{deletedMovieTitle ? `${deletedMovieTitle} was deleted from our records.` : null}</h1>
-          <div>Shows: {movies.length}</div>
+          <div>Movies: {movies.length}</div>
           <section className="movies-index">
             {movies.map((movie) => {
               return <MovieListing movie={movie} />;
