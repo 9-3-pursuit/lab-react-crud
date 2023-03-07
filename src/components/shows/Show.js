@@ -43,7 +43,7 @@ function Show() {
   const handleDelete = (showID) => {
     // when we delete a show, we want to remove it from the DOM and keep in mind the UX
     // we want the user to navigate to the showIndexPage
-    destroyMedia("show", showID)
+    destroyMedia("shows", showID)
       .then(() => {
         setShow({});
         // we want to navigate to the showIndexPage
