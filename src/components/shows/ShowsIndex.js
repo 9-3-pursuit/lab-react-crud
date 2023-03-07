@@ -14,7 +14,6 @@ export default function ShowsIndex() {
   const [deletedShowTitle, setDeletedShowTitle] = useState("");
 
   const location = useLocation();
-  const showTitleDeleted = location.state?.deletedShowTitle;
   // the `useEffect` hook allows us to run code when the component mounts
   // the second argument is an array of dependencies
   // So this means that the code inside the callback function of the
@@ -27,7 +26,15 @@ export default function ShowsIndex() {
     // from one component to another
     // in this case we are passing the `deletedShowTitle` from the `Show` component
     // to the `ShowsIndex` component
-    setDeletedShowTitle(showTitleDeleted || "");
+    // the code below is checking to see if the `deletedShowTitle` exists
+    // if it does exist, we are setting the `deletedShowTitle` state
+    // to the `deletedShowTitle` that was passed in the `state` object
+    // we are also deleting the `deletedShowTitle` from the `state` object
+    // so that the `deletedShowTitle` is not passed to the `ShowsIndex` component when it is refreshed
+    if (location.state?.deletedShowTitle) {
+      setDeletedShowTitle(location.state.deletedShowTitle);
+      delete location.state.deletedShowTitle;
+    }
 
     getAllShows()
       .then((data) => setShows(data))
@@ -35,7 +42,7 @@ export default function ShowsIndex() {
         console.log(catchError);
         setError(true);
       });
-  }, [showTitleDeleted]);
+  }, [location.state?.deletedShowTitle]);
 
   const handleTextChange = (event) => {
     const { value } = event.target;
