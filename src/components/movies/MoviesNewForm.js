@@ -21,7 +21,7 @@ export default function MoviesNewForm() {
     event.preventDefault();
     createMovie(movie)
     .then((response) => {
-      navigate(`/movies/${response.id}}`);
+      navigate(`/movies/${response.id}`);
     })
     .catch(error => {
       console.log(error);

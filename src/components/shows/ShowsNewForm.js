@@ -21,7 +21,7 @@ export default function ShowsForm() {
     event.preventDefault();
     createShow(show)
     .then((response) => {
-      navigate(`/shows/${response.id}}`);
+      navigate(`/shows/${response.id}`);
     })
     .catch(error => {
       console.log(error);

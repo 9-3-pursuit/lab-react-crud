@@ -41,7 +41,6 @@ export function updateShow(id, show) {
 }
 
 // Movies
-//const MoviesURL = process.env.REACT_APP_API_BASE_URL
 
 // Create Movie
 export function createMovie(movie) {
