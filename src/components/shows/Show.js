@@ -54,6 +54,7 @@ function Show() {
       })
       .catch((error) => {
         console.log(error);
+        setLoadingError(true);
       });
   };
 
