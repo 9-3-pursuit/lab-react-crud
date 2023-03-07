@@ -8,7 +8,7 @@ import "./styles/Show.css";
 import ErrorMessage from "../errors/ErrorMessage";
 
 // importing the `getOneShow` function from the `fetch` module
-import { getOneShow, destroyShow } from "../../api/fetch";
+import { getOneShow, destroyMedia } from "../../api/fetch";
 
 function Show() {
   const [show, setShow] = useState({});
@@ -43,7 +43,7 @@ function Show() {
   const handleDelete = (showID) => {
     // when we delete a show, we want to remove it from the DOM and keep in mind the UX
     // we want the user to navigate to the showIndexPage
-    destroyShow(showID)
+    destroyMedia("show", showID)
       .then(() => {
         setShow({});
         // we want to navigate to the showIndexPage

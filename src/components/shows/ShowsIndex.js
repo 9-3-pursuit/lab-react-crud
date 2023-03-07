@@ -1,16 +1,11 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { getAllShows } from "../../api/fetch";
-
+import { getAllMedia } from "../../api/fetch";
+import { filterMediaByTitle } from "../../util/helper";
 import ErrorMessage from "../errors/ErrorMessage";
 import ShowListing from "./ShowListing";
 
 import "./styles/ShowsIndex.css";
-
-const filterShows = (shows, searchTitle) => {
-  const filteredShows = shows.filter((show) => show.title.toLowerCase().includes(searchTitle.toLowerCase()));
-  return filteredShows;
-};
 
 export default function ShowsIndex() {
   const [error, setError] = useState(false);
@@ -41,16 +36,16 @@ export default function ShowsIndex() {
       delete location.state.deletedShowTitle;
     }
 
-    getAllShows()
+    getAllMedia("shows")
       .then((data) => {
-        const filtered = filterShows(data, searchTitle);
+        const filtered = filterMediaByTitle(data, searchTitle);
         setShows(filtered);
       })
       .catch((catchError) => {
         console.log(catchError);
         setError(true);
       });
-  }, [location.state?.deletedShowTitle, searchTitle, shows]);
+  }, [location.state?.deletedShowTitle, searchTitle]);
 
   const handleTextChange = (event) => {
     setSearchTitle(event.target.value);
