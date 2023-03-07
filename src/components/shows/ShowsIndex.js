@@ -5,7 +5,7 @@ import { filterMediaByTitle } from "../../util/helper";
 import ErrorMessage from "../errors/ErrorMessage";
 import ShowListing from "./ShowListing";
 
-import "./styles/ShowsIndex.css";
+import "../styles/MediaIndex.css";
 
 export default function ShowsIndex() {
   const [error, setError] = useState(false);
