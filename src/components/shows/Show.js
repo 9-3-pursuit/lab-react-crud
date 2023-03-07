@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+
+// useParams is a hook that allows us to access the URL parameters
 import { Link, useParams } from "react-router-dom";
 
 import "./styles/Show.css";
@@ -11,12 +13,24 @@ function Show() {
   const [show, setShow] = useState({});
   const [loadingError, setLoadingError] = useState(false);
 
+  // useParams is a hook that allows us to access the URL parameters
+  // In this case we want to access the id parameter
+  // The id parameter is the id of the show we want to display
+  // The id parameter is passed in the URL from the ShowList component
   const { id } = useParams();
 
+  // useEffect is a hook that allows us to run code when the component mounts and when the component updates
+  // The second argument is an array of dependencies.
+  // If the array is empty, the code in the callback function will only run when the component mounts.
+  // In this case we want to run the code in the callback function when the component mounts.
+  // We also want to run the code in the callback function when the id changes.
   useEffect(() => {
     getOneShow(id)
       .then((showData) => setShow(showData))
-      .catch((error) => setLoadingError(true));
+      .catch((error) => {
+        console.log(error);
+        setLoadingError(true);
+      });
   }, [id]);
 
   function handleDelete() {}
