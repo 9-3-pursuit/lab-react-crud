@@ -7,8 +7,12 @@ export function createShow(show) {
 }
 
 // Delete
-export function destroyShow(id) {
-  return;
+export async function destroyShow(showID) {
+  const response = await fetch(`${URL}/shows/${showID}`, {
+    method: "DELETE",
+  });
+
+  return response;
 }
 
 // Index/Get all
