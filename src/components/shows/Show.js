@@ -46,6 +46,10 @@ function Show() {
     destroyShow(showID)
       .then(() => {
         setShow({});
+        // we want to navigate to the showIndexPage
+        // while also passing in the title of the show that was deleted
+        // to display a message to the user of what show was deleted
+        // creating a better UX
         navigate("/shows", { state: { deletedShowTitle: show.title } });
       })
       .catch((error) => {
