@@ -36,7 +36,7 @@ export default function MoviesIndex() {
       console.log(error)
       setError(true)
     })
-  })
+  }, [])
 
   return (
     <div>
