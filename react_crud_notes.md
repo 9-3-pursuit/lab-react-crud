@@ -50,3 +50,25 @@ lsof -i :5000
 | New       | localhost:3000/shows/new | localhost:3000/api-base/shows     | POST      | Create      |
 | Edit      | localhost:3000/shows/:id | localhost:3000/api-base/shows/:id | PUT       | Update      |
 | Delete    |                          | localhost:3000/api-base/shows/:id | DELETE    | Delete      |
+
+When updating the `fetch.js` file, we are creating several functions that we will use throughout our application. These functions will allow us to perform CRUD operations on our resources.
+
+## getAllShows()
+
+This function will make a `GET` request to our backend API and return all of the shows that are stored in our database.
+
+```js
+const URL = process.env.REACT_APP_API_BASE_URL;
+
+export async function getAllShows() {
+  const res = await fetch(`${URL}/api/shows`);
+  const allShows = await res.json();
+  return allShows;
+}
+```
+
+Inside our `ShowsIndex.js` file, we will import the `getAllShows()` function and use it to fetch all of the shows from our backend API.
+
+```js
+import { getAllShows } from "../api/fetch.js";
+```
