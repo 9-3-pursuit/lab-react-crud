@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
-import { getOneShow, updateShow } from "../../api/fetch";
+import { getMedia, updateShow } from "../../api/fetch";
 
 import "./styles/ShowsForm.css";
 
@@ -24,7 +24,7 @@ export default function ShowsForm() {
   });
 
   useEffect(() => {
-    getOneShow(id)
+    getMedia("shows", id)
       .then((response) => {
         setShowTitle(response.title);
       })

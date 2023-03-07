@@ -8,7 +8,7 @@ import "./styles/Show.css";
 import ErrorMessage from "../errors/ErrorMessage";
 
 // importing the `getOneShow` function from the `fetch` module
-import { getOneShow, destroyMedia } from "../../api/fetch";
+import { getMedia, destroyMedia } from "../../api/fetch";
 
 function Show() {
   const [show, setShow] = useState({});
@@ -30,7 +30,7 @@ function Show() {
   // In this case we want to run the code in the callback function when the component mounts.
   // We also want to run the code in the callback function when the id changes.
   useEffect(() => {
-    getOneShow(id)
+    getMedia("shows", id)
       .then((showData) => {
         setShow(showData.id ? showData : null);
         setLoadingError(!showData.id);

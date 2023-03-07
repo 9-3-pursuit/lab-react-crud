@@ -22,16 +22,16 @@ export async function destroyMedia(mediaType, mediaID) {
   return response;
 }
 
-export async function getAllMedia(media) {
-  const response = await fetch(`${URL}/${media}`);
+export async function getAllMedia(mediaType) {
+  const response = await fetch(`${URL}/${mediaType}`);
   const allMedia = await response.json();
   return allMedia;
 }
 
-export async function getOneShow(id) {
-  const response = await fetch(`${URL}/shows/${id}`);
-  const show = await response.json();
-  return show;
+export async function getMedia(mediaType, mediaID) {
+  const response = await fetch(`${URL}/${mediaType}/${mediaID}`);
+  const media = await response.json();
+  return media;
 }
 
 export async function updateShow(id, show) {
