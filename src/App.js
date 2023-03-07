@@ -4,10 +4,10 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Footer from "./components/common/Footer";
 import Home from "./components/home/Home";
 import Nav from "./components/common/Nav";
-import Show from "./components/shows/Show";
-import ShowsEditForm from "./components/shows/ShowsEditForm";
-import ShowsIndex from "./components/shows/ShowsIndex";
-import ShowsNewForm from "./components/shows/ShowsNewForm";
+import Show from "./components/media/Show";
+import EditForm from "./components/media/forms/EditForm";
+import NewForm from "./components/media/forms/NewForm";
+import Index from "./components/media/Index";
 
 function App() {
   return (
@@ -16,10 +16,19 @@ function App() {
         <Nav />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/shows" element={<ShowsIndex />} />
-          <Route path="/shows/new" element={<ShowsNewForm />} />
-          <Route path="/shows/:id" element={<Show />} />
-          <Route path="/shows/:id/edit" element={<ShowsEditForm />} />
+          {/* ------------------ Shows -------------------- */}
+          <Route path="/shows" element={<Index type={"Shows"} />} />
+          <Route path="/shows/new" element={<NewForm type={"Shows"} />} />
+          <Route path="/shows/:id" element={<Show type={"Shows"} />} />
+          <Route path="/shows/:id/edit" element={<EditForm type={"Shows"} />} />
+          {/* ------------------ Movies -------------------- */}
+          <Route path="/movies" element={<Index type={"Movies"} />} />
+          <Route path="/movies/new" element={<NewForm type={"Movies"} />} />
+          <Route path="/movies/:id" element={<Show type={"Movies"} />} />
+          <Route
+            path="/movies/:id/edit"
+            element={<EditForm type={"Movies"} />}
+          />
         </Routes>
         <Footer />
       </Router>

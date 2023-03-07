@@ -1,8 +1,15 @@
-import { useState } from "react";
-import "./ShowsForm.css";
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import {
+  updateShow,
+  getOneShow,
+  getOneMovie,
+  updateMovie,
+} from "../../../api/fetch";
+import "./Form.css";
 
-export default function ShowsForm() {
-  const [show, setShow] = useState({
+export default function EditForm({ type }) {
+  const [media, setMedia] = useState({
     type: "",
     title: "",
     country: "",
@@ -14,11 +21,37 @@ export default function ShowsForm() {
     releaseYear: "",
   });
 
-  function handleSubmit(event) {}
+  const { id: paramID } = useParams();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    let ignore = false;
+    const mediaResult = async () => {
+      if (!ignore) {
+        try {
+          const fetchFunction = type === "Shows" ? getOneShow : getOneMovie;
+          const result = await fetchFunction(paramID);
+          const { id, ...mediaWithoutID } = result;
+          setMedia(mediaWithoutID);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    };
+    mediaResult();
+    return () => (ignore = true);
+  }, [paramID, type]);
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    const updateFunction = type === "Shows" ? updateShow : updateMovie;
+    updateFunction(paramID, media);
+    navigate(`/${type.toLowerCase()}/${paramID}`);
+  }
 
   function handleTextChange(event) {
-    setShow({
-      ...show,
+    setMedia({
+      ...media,
       [event.target.id]: event.target.value,
     });
   }
@@ -29,7 +62,7 @@ export default function ShowsForm() {
       <input
         type="text"
         id="title"
-        value={show.title}
+        value={media.title}
         onChange={handleTextChange}
       />
 
@@ -37,7 +70,7 @@ export default function ShowsForm() {
       <input
         type="text"
         id="description"
-        value={show.description}
+        value={media.description}
         onChange={handleTextChange}
       />
 
@@ -45,7 +78,7 @@ export default function ShowsForm() {
       <input
         type="text"
         id="type"
-        value={show.type}
+        value={media.type}
         onChange={handleTextChange}
       />
 
@@ -53,7 +86,7 @@ export default function ShowsForm() {
       <input
         type="text"
         id="rating"
-        value={show.rating}
+        value={media.rating}
         onChange={handleTextChange}
       />
 
@@ -61,7 +94,7 @@ export default function ShowsForm() {
       <input
         type="text"
         id="listedIn"
-        value={show.listedIn}
+        value={media.listedIn}
         onChange={handleTextChange}
       />
 
@@ -69,7 +102,7 @@ export default function ShowsForm() {
       <input
         type="text"
         id="duration"
-        value={show.duration}
+        value={media.duration}
         onChange={handleTextChange}
       />
 
@@ -77,7 +110,7 @@ export default function ShowsForm() {
       <input
         type="text"
         id="releaseYear"
-        value={show.releaseYear}
+        value={media.releaseYear}
         onChange={handleTextChange}
       />
 
@@ -85,7 +118,7 @@ export default function ShowsForm() {
       <input
         type="text"
         id="country"
-        value={show.country}
+        value={media.country}
         onChange={handleTextChange}
       />
 
@@ -93,7 +126,7 @@ export default function ShowsForm() {
       <input
         type="text"
         id="dateAdded"
-        value={show.dateAdded}
+        value={media.dateAdded}
         onChange={handleTextChange}
       />
 
