@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getAllMedia } from "../../api/fetch";
-
+import { filterMediaByTitle } from "../../util/helper";
 import ErrorMessage from "../errors/ErrorMessage";
 import MovieListing from "./MovieListing";
 
@@ -11,6 +11,9 @@ export default function MoviesIndex() {
   const [error, setError] = useState(false);
   const [movies, setMovies] = useState([]);
   const [searchTitle, setSearchTitle] = useState("");
+  const [deletedMovieTitle, setDeletedMovieTitle] = useState(null);
+
+  const location = useLocation();
 
   const handleTextChange = (event) => {
     const { value } = event.target;
@@ -18,13 +21,21 @@ export default function MoviesIndex() {
   };
 
   useEffect(() => {
-    getAllMedia("movies")
-      .then((allMovies) => setMovies(allMovies))
+    if (location.state?.deletedShowTitle) {
+      setDeletedMovieTitle(location.state.deletedMovieTitle);
+      delete location.state.deletedShowTitle;
+    }
+
+    getAllMedia("shows")
+      .then((data) => {
+        const filtered = filterMediaByTitle(data, searchTitle);
+        setMovies(filtered);
+      })
       .catch((catchError) => {
         console.log(catchError);
         setError(true);
       });
-  }, []);
+  }, [location.state?.deletedMovieTitle, searchTitle]);
 
   return (
     <div>
@@ -41,6 +52,8 @@ export default function MoviesIndex() {
             Search Movies:
             <input type="text" value={searchTitle} id="searchTitle" onChange={handleTextChange} />
           </label>
+          <h1>{deletedMovieTitle ? `${deletedMovieTitle} was deleted from our records.` : null}</h1>
+          <div>Shows: {movies.length}</div>
           <section className="movies-index">
             {movies.map((movie) => {
               return <MovieListing movie={movie} />;
