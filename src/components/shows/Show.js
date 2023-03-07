@@ -27,14 +27,16 @@ function Show() {
   // We also want to run the code in the callback function when the id changes.
   useEffect(() => {
     getOneShow(id)
-      .then((showData) => setShow(showData))
+      .then((showData) => {
+        setShow(showData.id ? showData : null);
+        setLoadingError(!showData.id);
+      })
       .catch((error) => {
-        console.log(error);
         setLoadingError(true);
       });
   }, [id]);
 
-  function handleDelete() {}
+  const handleDelete = (showID) => {};
 
   return (
     <section className="shows-show-wrapper">
