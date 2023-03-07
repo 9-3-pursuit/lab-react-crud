@@ -3,41 +3,37 @@ const URL = process.env.REACT_APP_API_BASE_URL;
 // Shows
 
 // Create
-export async function createShow(show) {
-  const response = await fetch(`${URL}/shows`, {
+export async function createMedia(mediaType, media) {
+  const response = await fetch(`${URL}/${mediaType}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(show),
+    body: JSON.stringify(media),
   });
   return response;
 }
 
-// Delete
-export async function destroyShow(showID) {
-  const response = await fetch(`${URL}/shows/${showID}`, {
+export async function destroyMedia(mediaType, mediaID) {
+  const response = await fetch(`${URL}/${mediaType}/${mediaID}`, {
     method: "DELETE",
   });
 
   return response;
 }
 
-// Index/Get all
-export async function getAllShows() {
-  const response = await fetch(`${URL}/shows`);
-  const allShows = await response.json();
-  return allShows;
+export async function getAllMedia(media) {
+  const response = await fetch(`${URL}/${media}`);
+  const allMedia = await response.json();
+  return allMedia;
 }
 
-// Show/Get one
 export async function getOneShow(id) {
   const response = await fetch(`${URL}/shows/${id}`);
   const show = await response.json();
   return show;
 }
 
-// Update
 export async function updateShow(id, show) {
   const response = await fetch(`${URL}/shows/${id}`, {
     method: "PUT",
@@ -50,6 +46,7 @@ export async function updateShow(id, show) {
 }
 
 // Movies
+
 export async function createMovie(movie) {
   const response = await fetch(`${URL}/movies`, {
     method: "POST",
