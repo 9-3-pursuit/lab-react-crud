@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { getAllMovies } from "../../api/fetch";
+import { getAllMedia } from "../../api/fetch";
 
 import ErrorMessage from "../errors/ErrorMessage";
 //import MovieListing from "./MovieListing";
@@ -18,7 +18,7 @@ export default function MoviesIndex() {
   };
 
   useEffect(() => {
-    getAllMovies()
+    getAllMedia("movies")
       .then((allMovies) => setMovies(allMovies))
       .catch((catchError) => {
         console.log(catchError);

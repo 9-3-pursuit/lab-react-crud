@@ -44,28 +44,3 @@ export async function updateMedia(mediaType, mediaID, media) {
   });
   return response;
 }
-
-// Movies
-
-export async function createMovie(movie) {
-  const response = await fetch(`${URL}/movies`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(movie),
-  });
-  return response;
-}
-
-export async function getAllMovies() {
-  const response = await fetch(`${URL}/movies`);
-  const allMovies = await response.json();
-  return allMovies;
-}
-
-export async function getOneMovie(id) {
-  const response = await fetch(`${URL}/movies/${id}`);
-  const movie = await response.json();
-  return movie;
-}
