@@ -14,8 +14,8 @@ export function destroyShow(id) {
 // Index/Get all
 export async function getAllShows() {
   const response = await fetch(`${URL}/shows`);
-  const shows = await response.json();
-  return shows;
+  const allShows = await response.json();
+  return allShows;
 }
 
 // Show/Get one
@@ -31,7 +31,14 @@ export function updateShow(id, show) {
 }
 
 // Movies
+export async function getAllMovies() {
+  const response = await fetch(`${URL}/movies`);
+  const allMovies = await response.json();
+  return allMovies;
+}
 
-export function getAllMovies() {
-  return;
+export async function getOneMovie(id) {
+  const response = await fetch(`${URL}/movies/${id}`);
+  const movie = await response.json();
+  return movie;
 }
