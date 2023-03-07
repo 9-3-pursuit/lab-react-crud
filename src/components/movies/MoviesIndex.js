@@ -3,9 +3,9 @@ import { useState, useEffect } from "react";
 import { getAllMedia } from "../../api/fetch";
 
 import ErrorMessage from "../errors/ErrorMessage";
-//import MovieListing from "./MovieListing";
+import MovieListing from "./MovieListing";
 
-//import "./styles/MoviesIndex.css";
+import "../styles/MediaIndex.css";
 
 export default function MoviesIndex() {
   const [error, setError] = useState(false);
@@ -43,7 +43,7 @@ export default function MoviesIndex() {
           </label>
           <section className="movies-index">
             {movies.map((movie) => {
-              // return <MovieListing movie={movie} />;
+              return <MovieListing movie={movie} />;
               console.log(movie);
             })}
           </section>
