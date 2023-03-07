@@ -3,8 +3,8 @@ const URL = process.env.REACT_APP_API_BASE_URL;
 // Shows
 
 // Create
-export function createShow(show) {
-  const response = fetch(`${URL}/shows`, {
+export async function createShow(show) {
+  const response = await fetch(`${URL}/shows`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -38,8 +38,8 @@ export async function getOneShow(id) {
 }
 
 // Update
-export function updateShow(id, show) {
-  const response = fetch(`${URL}/shows/${id}`, {
+export async function updateShow(id, show) {
+  const response = await fetch(`${URL}/shows/${id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -50,8 +50,8 @@ export function updateShow(id, show) {
 }
 
 // Movies
-export const createMovie = (movie) => {
-  const response = fetch(`${URL}/movies`, {
+export async function createMovie(movie) {
+  const response = await fetch(`${URL}/movies`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -59,7 +59,7 @@ export const createMovie = (movie) => {
     body: JSON.stringify(movie),
   });
   return response;
-};
+}
 
 export async function getAllMovies() {
   const response = await fetch(`${URL}/movies`);
