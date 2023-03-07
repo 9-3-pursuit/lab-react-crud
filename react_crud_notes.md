@@ -72,3 +72,5 @@ Inside our `ShowsIndex.js` file, we will import the `getAllShows()` function and
 ```js
 import { getAllShows } from "../api/fetch.js";
 ```
+
+The `getAllShows()` function will return an array of objects. We will use the `useState()` hook to store this array of objects in our component's state. This data is needed in the `ShowsIndex.js` component because when the user lands on that page by clicking the `All Shows` nav button, we want to display all of the shows that are stored in our database.
