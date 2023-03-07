@@ -7,6 +7,11 @@ import ShowListing from "./ShowListing";
 
 import "./styles/ShowsIndex.css";
 
+const filterShows = (shows, searchTitle) => {
+  const filteredShows = shows.filter((show) => show.title.toLowerCase().includes(searchTitle.toLowerCase()));
+  return filteredShows;
+};
+
 export default function ShowsIndex() {
   const [error, setError] = useState(false);
   const [shows, setShows] = useState([]);
@@ -37,16 +42,18 @@ export default function ShowsIndex() {
     }
 
     getAllShows()
-      .then((data) => setShows(data))
+      .then((data) => {
+        const filtered = filterShows(data, searchTitle);
+        setShows(filtered);
+      })
       .catch((catchError) => {
         console.log(catchError);
         setError(true);
       });
-  }, [location.state?.deletedShowTitle]);
+  }, [location.state?.deletedShowTitle, searchTitle, shows]);
 
   const handleTextChange = (event) => {
-    const { value } = event.target;
-    setSearchTitle(value);
+    setSearchTitle(event.target.value);
   };
 
   return (
@@ -65,6 +72,7 @@ export default function ShowsIndex() {
             <input type="text" value={searchTitle} id="searchTitle" onChange={handleTextChange} />
           </label>
           <h1>{deletedShowTitle ? `${deletedShowTitle} was deleted from our records.` : null}</h1>
+          <div>Shows: {shows.length}</div>
           <section className="shows-index">
             {shows.map((show) => {
               return <ShowListing show={show} />;
