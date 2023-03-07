@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 // useParams is a hook that allows us to access the URL parameters
 import { Link, useNavigate, useParams } from "react-router-dom";
 
-import "./styles/Show.css";
+import "../styles/Media.css";
 
 import ErrorMessage from "../errors/ErrorMessage";
 
