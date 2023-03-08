@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { getOneShow} from "../../api/fetch";
+import { getOneMovie} from "../../api/fetch";
 
 // import "./Show.css";
 
@@ -17,7 +17,7 @@ function Movie() {
 
 
   useEffect(() => {
-    getOneShow(id)
+    getOneMovie(id)
       .then((response) => {
         setMovie(response);
         if (response.id) {
