@@ -8,7 +8,7 @@ import "./MoviesIndex.css";
 // at some point in our code we should change error message to true if there's an error
 function filterMovies(search, movies) {
    return movies.filter((movie) => {
-    return movie.title.toLowerCase().includes(search.toLowerCase()); 
+    return movie.title.toLowerCase().match(search.toLowerCase()); 
   });
 }
 
@@ -21,7 +21,7 @@ export default function MoviesIndex() {
   function handleTextChange(event) {
     setSearchTitle(event.target.value);
     const result = event.target.value.length ? filterMovies(event.target.value, allMovies) : allMovies
-    //const filteredMovies = filterMovies(event.target.value, movies);
+    setSearchTitle(searchTitle);
     setMovies(result);
   }
   

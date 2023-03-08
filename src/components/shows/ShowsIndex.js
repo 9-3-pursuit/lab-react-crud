@@ -8,7 +8,7 @@ import "./ShowsIndex.css";
 // at some point in our code we should change error message to true if there's an error
 function filterShows(search, shows) {
    return shows.filter((show) => {
-    return show.title.toLowerCase().includes(search.toLowerCase()); 
+    return show.title.toLowerCase().match(search.toLowerCase()); 
   });
 }
 
@@ -22,7 +22,7 @@ export default function ShowsIndex() {
   function handleTextChange(event) {
     setSearchTitle(event.target.value);
     const result = event.target.value.length ? filterShows(event.target.value, allShows) : allShows
-    //const filteredShows = filterShows(event.target.value, shows);
+    setSearchTitle(searchTitle);
     setShows(result);
   }
   
