@@ -1,32 +1,82 @@
-// Shows
+// Shows 
+const URL = process.env.REACT_APP_API_BASE_URL
 
-// Create
+// Create Show
 export function createShow(show) {
-  return;
-}
+  const method = {
+    method: "POST",
+    body: JSON.stringify(show),
+    headers: { 'Content-Type': 'application/json' }
+  }
+  return fetch(`${URL}/shows`, method)
+  .then((response) => response.json());
+} // database will generate/create an ID for you!
 
-// Delete
+// Delete Show
 export function destroyShow(id) {
-  return;
+  return fetch(`${URL}/shows/${id}`, {method: "DELETE"});
 }
 
-// Index/Get all
+// Index/Get all Shows
 export function getAllShows() {
-  return;
+  return fetch(`${URL}/shows`)
+  .then(response => response.json()); // fetch returns an array of shows in JS.
 }
 
-// Show/Get one
+// Show/Get one Show
 export function getOneShow(id) {
-  return;
+  return fetch(`${URL}/shows/${id}`)
+  .then(response => response.json()); 
 }
 
-// Update
+// Update Shows
 export function updateShow(id, show) {
-  return;
+  const method = {
+    method: "PUT",
+    body: JSON.stringify(show),
+    headers: { 'Content-Type': 'application/json' }
+  }
+  return fetch(`${URL}/shows/${id}`, method)
+  .then(response => response.json()); 
 }
 
 // Movies
 
+// Create Movie
+export function createMovie(movie) {
+  const method = {
+    method: "POST",
+    body: JSON.stringify(movie),
+    headers: { 'Content-Type': 'application/json' }
+  }
+  return fetch(`${URL}/movies`, method)
+  .then((response) => response.json());
+} // database will generate/create an ID for you!
+
+// Delete Movie
+export function destroyMovie(id) {
+  return fetch(`${URL}/movies/${id}`, {method: "DELETE"})
+}
+
+// Index/Get all Movies
 export function getAllMovies() {
-  return;
+  return fetch(`${URL}/movies`)
+  .then(response => response.json()) // fetch returns an array of movies in JS.
+}
+
+// Movie/Get one Movie
+export function getOneMovie(id) {
+  return fetch(`${URL}/movies/${id}`)
+  .then(response => response.json()) 
+}
+
+// Update Movies
+export function updateMovie(id, movie) {
+  const method = {
+    method: "PUT",
+    body: JSON.stringify(movie),
+    headers: { 'Content-Type': 'application/json' }
+  }
+  return fetch(`${URL}/movies/${id}`, method)
+  .then(response => response.json()); 
 }

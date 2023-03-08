@@ -1,22 +1,21 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { getOneShow, destroyShow, updateShow } from "../../api/fetch";
+import { getOneMovie, destroyMovie, updateMovie } from "../../api/fetch.js";
 
-import "./Show.css";
+import "./Movie.css";
 
 import ErrorMessage from "../errors/ErrorMessage";
 
-function Show() {
-  const [show, setShow] = useState({});
+function Movie() {
+  const [movie, setMovie] = useState({});
   const [loadingError, setLoadingError] = useState(false);
-//  const [updateShow, setUpdateShow] = useState('');
     // console.log(useParams());
   const { id } = useParams(); // useParams gives us access to the parameters we set in our paths in our routing
   const navigate = useNavigate()
 
   useEffect(() => {
-    getOneShow(id).then(response => {
-      setShow(response);
+    getOneMovie(id).then(response => {
+      setMovie(response);
       if (response.id) {
       setLoadingError(false);
       } else {
@@ -30,8 +29,8 @@ function Show() {
   }, [id]);
 
   function handleDelete(id) {
-    destroyShow(id).then(() => {
-      navigate("/shows");
+    destroyMovie(id).then(() => {
+      navigate("/movies");
     })
     .catch((error) => {
       console.log(error)
@@ -39,50 +38,49 @@ function Show() {
     });
   }
 
-  function handleUpdate(id, show) {
-    updateShow(id, show).then(() => {
-      navigate("/shows");
+  function handleUpdate(id, movie) {
+    updateMovie(id, movie).then(() => {
+      navigate("/movies");
     })
     .catch((error) => {
       console.log(error)
       loadingError(true)
     });
   }
-
 
   return (
-    <section className="shows-show-wrapper">
-      <h2>{show.title}</h2>
-      <section className="shows-show">
+    <section className="movies-movie-wrapper">
+      <h2>{movie.title}</h2>
+      <section className="movies-movie">
         {loadingError ? (
           <ErrorMessage />
         ) : (
           <>
             <aside>
               <p>
-                <span>Duration:</span> {show.duration}
+                <span>Duration:</span> {movie.duration}
               </p>
               <p>
-                <span>Listed Categories:</span> {show.listedIn}
+                <span>Listed Categories:</span> {movie.listedIn}
               </p>
               <p>
-                <span>Country:</span> {show.country}
+                <span>Country:</span> {movie.country}
               </p>
               <p>
-                <span>Rating:</span> {show.rating}
+                <span>Rating:</span> {movie.rating}
               </p>
               <p>
-                <span>Date Added:</span> {show.dateAdded}
+                <span>Date Added:</span> {movie.dateAdded}
               </p>
             </aside>
             <article>
-              <p>{show.description}</p>
+              <p>{movie.description}</p>
             </article>
             <aside>
-              <button className="delete" onClick={() => handleDelete(show.id)}>
-                Remove Show
+              <button className="delete" onClick={() => handleDelete(movie.id)}>
+                Remove Movie
               </button>
-              <Link to={`/shows/${id}/edit`}>
+              <Link to={`/movies/${id}/edit`}>
                 <button>Edit</button>
               </Link>
             </aside>
@@ -92,5 +90,4 @@ function Show() {
     </section>
   );
 }
-
-export default Show;
+export default Movie;
