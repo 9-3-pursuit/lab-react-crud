@@ -1,13 +1,62 @@
 import { Link } from "react-router-dom";
-
+// importing useState to add state to components
+// importing useEffect to allow performance of side effects within components
+import { useEffect, useState } from "react";
+import { getAllShows } from "../../api/fetch";
 import ErrorMessage from "../errors/ErrorMessage";
-
+import ShowListing from "./ShowListing";
 import "./ShowsIndex.css";
 
 export default function ShowsIndex() {
+
+  // initializing state value of error variable to false
+  const [error, setError] = useState(false);
+  // initializing state value of shows variable to empty array
+  const [shows, setShows] = useState([]);
+  // initializing state value of allShows variable to empty array// 
+  const [allShows, setAllShows] = useState([])
+  // initializing state value of searchTitle variable to empty string
+  const [searchTitle, setSearchTitle] = useState("")
+
+  // calling useEffect to call getAllShows function 
+  useEffect(() => {
+    getAllShows().then(response => {
+      // using setShows function inside getAllShows to set value of shows state variable to API response
+      setShows(response);
+      // using setAllShows function inside getAllShows to set value of allShows state variable to API response
+      setAllShows(response);
+      // using setError to ensure value of error variable is false 
+      setError(false);
+    }).catch((error) => {
+      console.log(error)
+      setError(true)
+    })
+  }, [])
+
+  // helper function to filter shows 
+  function filterShows(search, shows) {
+    return shows.filter((show) => {
+      return show.title.toLowercase().includes(search.toLowercase())
+    });
+  }
+
+  // creating function to track value of input text 
+  function handleTextChange(event) {
+    // updating state variable to equal value of event target
+    setSearchTitle(event.target.value);
+    // using ternary operator to set value of result variable to filtered shows (truthy)
+    // using ternary operator to set value of result variable to all shows (falsy)
+    const result = event.target.value.length ? filterShows(event.target.value, allShows) : allShows;
+    // updating state variable to equal value of result variable 
+    setShows(result);
+  }
+
+
+
+
   return (
     <div>
-      {false ? (
+      {error ? (
         <ErrorMessage />
       ) : (
         <section className="shows-index-wrapper">
@@ -20,13 +69,15 @@ export default function ShowsIndex() {
             Search Shows:
             <input
               type="text"
-              // value={searchTitle}
+              value={searchTitle}
               id="searchTitle"
-              // onChange={handleTextChange}
+              onChange={handleTextChange}
             />
           </label>
           <section className="shows-index">
-            {/* <!-- ShowListing components --> */}
+            {shows.map(show => {
+              return <ShowListing show={show} key={show.id} />
+            })}
           </section>
         </section>
       )}

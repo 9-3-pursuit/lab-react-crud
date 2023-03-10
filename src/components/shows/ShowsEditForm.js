@@ -1,7 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { updateShow, getOneShow } from "../../api/fetch";
+// importing useParams to access id param from show
+import { useParams, useNavigate } from "react-router-dom";
 import "./ShowsForm.css";
 
 export default function ShowsForm() {
+  // creating state variable and initializing its value to an object with key/value pairs about show info
   const [show, setShow] = useState({
     type: "",
     title: "",
@@ -14,7 +18,28 @@ export default function ShowsForm() {
     releaseYear: "",
   });
 
-  function handleSubmit(event) {}
+  // creating variable to access id parameter via useParams() function
+  const { id } = useParams();
+  // creating variable to store value of useNavigate function 
+  let navigate = useNavigate();
+
+  // creating function to handle submit action 
+  function handleSubmit(event) {
+    event.preventDefault();
+    updateShow(id, show).then(response => {
+      navigate(`/shows/${id}`)
+    }).catch(error => {
+      console.log(error)
+    })
+  }
+
+  useEffect(() => {
+    getOneShow(id).then(response => {
+      setShow(response);
+    }).catch((error) => {
+      console.log(error)
+    });
+  }, [id]);
 
   function handleTextChange(event) {
     setShow({

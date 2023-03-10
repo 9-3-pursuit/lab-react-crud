@@ -1,6 +1,8 @@
 import { useState } from "react";
-
+import { createShow } from "../../api/fetch";
+import { useNavigate } from "react-router-dom";
 import "./ShowsForm.css";
+
 
 export default function ShowsForm() {
   const [show, setShow] = useState({
@@ -15,7 +17,18 @@ export default function ShowsForm() {
     releaseYear: "",
   });
 
-  function handleSubmit(event) {}
+  // creating variable to store returned value of useNavigate function 
+  let navigate = useNavigate()
+
+  function handleSubmit(event) {
+    // adding prevent default so page does not refresh on submit
+    event.preventDefault();
+    createShow(show).then(response => {
+      navigate(`/shows/${response.id}`)
+    }).catch(error => {
+      console.log(error)
+    });
+  }
 
   function handleTextChange(event) {
     setShow({
