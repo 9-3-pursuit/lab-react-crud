@@ -1,32 +1,46 @@
+const URL = process.env.REACT_APP_API_BASE_URL;
+
 // Shows
 
 // Create
-export function createShow(show) {
-  return;
+export async function createMedia(mediaType, media) {
+  const response = await fetch(`${URL}/${mediaType}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(media),
+  });
+  return response;
 }
 
-// Delete
-export function destroyShow(id) {
-  return;
+export async function destroyMedia(mediaType, mediaID) {
+  const response = await fetch(`${URL}/${mediaType}/${mediaID}`, {
+    method: "DELETE",
+  });
+
+  return response;
 }
 
-// Index/Get all
-export function getAllShows() {
-  return;
+export async function getAllMedia(mediaType) {
+  const response = await fetch(`${URL}/${mediaType}`);
+  const allMedia = await response.json();
+  return allMedia;
 }
 
-// Show/Get one
-export function getOneShow(id) {
-  return;
+export async function getMedia(mediaType, mediaID) {
+  const response = await fetch(`${URL}/${mediaType}/${mediaID}`);
+  const media = await response.json();
+  return media;
 }
 
-// Update
-export function updateShow(id, show) {
-  return;
-}
-
-// Movies
-
-export function getAllMovies() {
-  return;
+export async function updateMedia(mediaType, mediaID, media) {
+  const response = await fetch(`${URL}/${mediaType}/${mediaID}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(media),
+  });
+  return response;
 }
