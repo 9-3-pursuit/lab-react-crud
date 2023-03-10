@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { createMedia } from "../../api/fetch";
 
 import "../styles/MediaForm.css";
 
@@ -15,7 +16,16 @@ export default function ShowsForm() {
     releaseYear: "",
   });
 
-  function handleSubmit(event) {}
+  function handleSubmit(event) {
+    event.preventDefault();
+    createMedia("shows", show)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
   function handleTextChange(event) {
     setShow({

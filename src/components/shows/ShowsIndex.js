@@ -13,6 +13,13 @@ export default function ShowsIndex() {
   const [searchTitle, setSearchTitle] = useState("");
   const [deletedShowTitle, setDeletedShowTitle] = useState("");
 
+  // what is useLocation?
+  // the `useLocation` hook is a hook that is provided by the `react-router-dom` package
+  // the `useLocation` hook allows us to access the `location` object
+  // the `location` object is an object that contains information about the current URL
+  // the `location` object is updated whenever the URL changes
+  // the `location` object has a `state` property
+  // the `state` property is an object that we can use to pass data
   const location = useLocation();
   // the `useEffect` hook allows us to run code when the component mounts
   // the second argument is an array of dependencies
