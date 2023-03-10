@@ -5,6 +5,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import "./ShowsForm.css";
 
 export default function ShowsForm() {
+  // creating state variable and initializing its value to an object with key/value pairs about show info
   const [show, setShow] = useState({
     type: "",
     title: "",
@@ -19,8 +20,10 @@ export default function ShowsForm() {
 
   // creating variable to access id parameter via useParams() function
   const { id } = useParams();
-  // creating variable to store value of navigate function 
+  // creating variable to store value of useNavigate function 
   let navigate = useNavigate();
+
+  // creating function to handle submit action 
   function handleSubmit(event) {
     event.preventDefault();
     updateShow(id, show).then(response => {

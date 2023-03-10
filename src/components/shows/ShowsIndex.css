@@ -29,6 +29,7 @@ button a {
   .shows-index-wrapper {
     width: 90%;
   }
+
   .shows-index {
     grid-template-columns: repeat(2, 1fr);
   }

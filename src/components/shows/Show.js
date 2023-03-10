@@ -2,9 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 // importing 
 import { destroyShow, getOneShow } from "../../api/fetch";
-
 import "./Show.css";
-
 import ErrorMessage from "../errors/ErrorMessage";
 
 function Show() {
@@ -36,7 +34,7 @@ function Show() {
         navigate("/shows");
       }).catch(error => {
         console.log(error);
-        loadingError(true);
+        setLoadingError(true);
       })
   }
 

@@ -7,13 +7,6 @@ import ErrorMessage from "../errors/ErrorMessage";
 import ShowListing from "./ShowListing";
 import "./ShowsIndex.css";
 
-// helper function to filter shows 
-function filterShows(search, shows) {
-  return shows.filter((show) => {
-    return show.title.toLowercase().includes(search.toLowercase())
-  });
-}
-
 export default function ShowsIndex() {
 
   // initializing state value of error variable to false
@@ -24,12 +17,6 @@ export default function ShowsIndex() {
   const [allShows, setAllShows] = useState([])
   // initializing state value of searchTitle variable to empty string
   const [searchTitle, setSearchTitle] = useState("")
-
-  function handleTextChange(event) {
-    setSearchTitle(event.target.value);
-    const result = event.target.value.length ? filterShows(event.target.value, allShows) : allShows
-    setShows(result);
-  }
 
   // calling useEffect to call getAllShows function 
   useEffect(() => {
@@ -45,6 +32,26 @@ export default function ShowsIndex() {
       setError(true)
     })
   }, [])
+
+  // helper function to filter shows 
+  function filterShows(search, shows) {
+    return shows.filter((show) => {
+      return show.title.toLowercase().includes(search.toLowercase())
+    });
+  }
+
+  // creating function to track value of input text 
+  function handleTextChange(event) {
+    // updating state variable to equal value of event target
+    setSearchTitle(event.target.value);
+    // using ternary operator to set value of result variable to filtered shows (truthy)
+    // using ternary operator to set value of result variable to all shows (falsy)
+    const result = event.target.value.length ? filterShows(event.target.value, allShows) : allShows;
+    // updating state variable to equal value of result variable 
+    setShows(result);
+  }
+
+
 
 
   return (
